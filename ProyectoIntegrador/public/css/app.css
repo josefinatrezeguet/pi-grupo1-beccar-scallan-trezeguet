@@ -65,7 +65,7 @@ hr {
 }
 
 .container {
-  max-width: 1300px;
+  max-width: 1350px;
 }
 
 
@@ -84,6 +84,10 @@ hr {
   font-size: 1.5em;
   margin-top: 20px;
   text-align: center;
+}
+
+.search-container {
+  width: 250px;
 }
 
 .search-form {
@@ -116,6 +120,11 @@ hr {
 .logo {
   height: 100px;
   width: 100px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
 }
 
 
