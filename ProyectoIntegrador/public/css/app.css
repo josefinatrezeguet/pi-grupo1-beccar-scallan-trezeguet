@@ -10,7 +10,7 @@
   --gray: #806565;
   --light-gray: #f1eaea;
   --green: #39b54a;
-  --base-font-family: 'Roboto', sans-serif
+  --base-font-family: "Avenir next"
 }
 
 
@@ -65,13 +65,13 @@ hr {
 }
 
 .container {
-  max-width: 1350px;
+  max-width: 95%;
 }
 
 
 /*====== Main Header ======*/
 .main-header {
-  padding: 10px 0;
+  padding: 10px 30px;
   background-color: var(--yellow);
 }
 
@@ -125,6 +125,7 @@ hr {
 .row {
   display: flex;
   justify-content: space-between;
+  max-width: 100%;
 }
 
 
@@ -169,10 +170,9 @@ hr {
 }
 
 
-
 /*====== Banner ======*/
 .banner {
-  background-image: url(/images/img-home-banner.jpg);
+  background-image: none;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
@@ -312,6 +312,12 @@ hr {
   margin: 0;
   color: var(--gray);
   padding: 15px 0;
+}
+
+.credits {
+  background-color: #D4C1C1;
+  color: #f1eaea;
+  font-size: 15px;
 }
 
 
