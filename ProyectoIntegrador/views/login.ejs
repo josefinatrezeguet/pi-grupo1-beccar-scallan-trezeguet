@@ -1,34 +1,44 @@
 <!DOCTYPE html>
 <html lang="es">
-<!-- Include Head -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body id="body">
+	<header>
+        <!-- Cabecera -->
+    </header>
 
-<%- include("./partials/head") %>
 
-<body>
-	<!-- Header -->
-	<%- include("./partials/header") %>
-	<!-- /Header -->
 
-	<!-- Novedades -->
-	<div class="container products-wrapper">
-		<div class="row">
-			<div class="col-12">
-				<h2 class="products-title">Ingresar</h2>
-			</div>
-			<!-- Show the "ultimos" products -->
-			<h2 class="col-12"> <i>///////////////////////////////////////// <br> Acá va el formulario de login. <br>
-			Debe cumplir con los puntos de la consigna y ser coherente con la tabla de la base de datos <br>
-			Eliminen estás líneas y coloquen el formulario. <br>
-			Recuerden todo lo que necesita tanto la etiqueta form como los campos input para operar correctamtente</i> <br>
-			////////////////
-			</h2>
+    <main>
+        <!-- principal -->
+    <h1>Login</h1>
+    	<form action="/ProyectoIntegrador/views/login.ejs" method="GET">
+		<div class="contenedor-input">
+			<label for="usuario">Usuario:</label>
+			<input type="email" id="usuario" name="usuario" required>
 		</div>
-	</div>
+       
+		<div class="contenedor-input">
+        	<label for="contraseña">Contraseña:</label>
+        	<input type="password" id="contraseña" name="contraseña" required>
+		</div>
 
-	<!-- footer -->
-	<%- include("./partials/footer") %>
+		<div class="contenedor-input">
+        	<input type="checkbox" id="recordarme" name="recordarme">
+        	<label for="recordarme">Recordarme</label>
+		</div>
 
-	<!-- /footer -->
+		<div class="contenedor-input">
+        	<button type="submit">Iniciar sesión</button>
+		</div>
+    	</form>
+	</main>
+
+	<footer>
+        <!-- pie de pagina -->
+    </footer>
 </body>
-
 </html>
