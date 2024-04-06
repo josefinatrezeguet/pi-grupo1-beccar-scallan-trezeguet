@@ -1,34 +1,48 @@
 <!DOCTYPE html>
 <html lang="es">
-<!-- Include Head -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Producto</title>
+</head>
+<body id="body">
 
-<%- include("./partials/head") %>
+    <header>
+        <!-- Cabecera -->
+    </header>
 
-<body>
-	<!-- Header -->
-	<%- include("./partials/headerLogueado") %>
-	<!-- /Header -->
 
-	<!-- Novedades -->
-	<div class="container products-wrapper">
-		<div class="row">
-			<div class="col-12">
-				<h2 class="products-title">Agregar productos</h2>
-			</div>
-			<!-- Show the "ultimos" products -->
-			<h2 class="col-12"> <i>///////////////////////////////////////// <br> Acá va el formulario para agregar prodcutos al catálogo. <br>
-			Debe cumplir con los puntos de la consigna y ser coherente con la tabla de la base de datos. <br>
-			Eliminen estás líneas y coloquen el formulario. <br>
-			Recuerden todo lo que necesita tanto la etiqueta form como los campos input para operar correctamtente</i> <br>
-			////////////////
-			</h2>
+
+    <main>
+        <!-- principal -->
+
+    	<h1>Agregar Producto</h1>
+    	<form action="/ProyectoIntegrador/views/product-add.ejs" method="GET">
+
+		<div class="contenedor-input">
+        	<label for="imagen">Imagen:</label>
+        	<input type="file" id="imagen" name="imagen" required>
 		</div>
-	</div>
 
-	<!-- footer -->
-	<%- include("./partials/footer") %>
+		<div class="contenedor-input">
+        	<label for="nombre_producto">Nombre del Producto:</label>
+        	<input type="text" id="nombre_producto" name="nombre_producto" required>
+		</div>
 
-	<!-- /footer -->
+		<div class="contenedor-input">
+       	 	<label for="descripcion">Descripción:</label>
+        	<textarea id="descripcion" name="descripcion" rows="4" cols="50" required></textarea>
+		</div>
+
+		<div class="contenedor-input">
+        <button type="submit">Agregar Producto</button>
+		</div>
+    </form>
+</main>
+
+<footer>
+	<!-- pie de pagina -->
+</footer>
+
 </body>
-
 </html>
