@@ -1,63 +1,44 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar mi perfil</title>
+<!-- Include Head -->
+
+<%- include("./partials/head") %>
+
+<body>
+	<!-- Header -->
+	<%- include("./partials/header") %>
+
+	<!-- /Header -->
+
+	<!-- Novedades -->
+	<div class="container products-wrapper">
+		<div class="row">
+			<div class="col-12">
+				<h2 class="products-title">Editar perfil</h2>
+			</div>
+			<form action="/users/edit" method="get">
+				<input class="form-input" type="email" name="email" placeholder="Email" required>
+ 
+				<input class="form-input" type="text" name="usuario" placeholder="Usuario" required>
+ 
+				<input class="form-input" type="password" name="contrasena" placeholder="Contraseña" required>
 	
-</head>
-<body id="body">
-
-    <header>
-        <!-- Cabecera -->
-    </header>
-
-
-
-    <main>
-        <!-- principal -->
-
-    <h1>Editar mi perfil</h1>
-    <form action="./profile-edit.ejs" method="GET">
-		<div class="contenedor-input">
-        	<label for="email">Email:</label>
-        	<input type="email" id="email" name="email" required>
+				<label for="fecha_nacimiento" class="label">Fecha de nacimiento</label>
+				<input class="form-input" type="date" name="fecha_nacimiento" required>
+	
+				<label for="nro_documento" class="label">Número de documento</label>
+				<input class="form-input" type="number" name="numero_documento"required>
+	
+				<label for="foto_perfil" class="label">Foto de perfil</label>
+				<input class="form-input" type="text" name="foto_perfil" required>
+	
+				<button class="form-label" type="submit">Guardar cambios</button>
+			 </form>	
 		</div>
-		<div class="contenedor-input">
-       		<label for="usuario">Usuario:</label>
-        	<input type="text" id="usuario" name="usuario" required>
-		</div>
+	</div>
 
-	    <div class="contenedor-input">
-        	<label for="contraseña">Contraseña:</label>
-        	<input type="password" id="contraseña" name="contraseña" required>
-		</div>
-
-		<div class="contenedor-input">
-        	<label for="fecha_nacimiento">Fecha de Nacimiento:</label>
-        	<input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required>
-		</div>
-
-		<div class="contenedor-input">
-        	<label for="nro_documento">Número de Documento:</label>
-        	<input type="number" id="nro_documento" name="nro_documento" required>
-		</div>
-
-		<div class="contenedor-input">
-        	<label for="foto_perfil">Foto de Perfil:</label>
-        	<input type="text" id="foto_perfil" name="foto_perfil" required>
-		</div>
-
-		<div class="contenedor-input">
-        	<button type="submit">Guardar cambios</button>
-		</div>
-    </form>
-
-</main>
-
-<footer>
-	<!-- pie de pagina -->
-</footer>
-
+	<!-- footer -->
+	<%- include("./partials/footer") %>
+	<!-- /footer -->
 </body>
 </html>

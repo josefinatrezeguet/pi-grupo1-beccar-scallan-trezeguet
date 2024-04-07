@@ -1,53 +1,44 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agregar Producto</title>
-</head>
-<body id="body">
+<!-- Include Head -->
 
-    <header>
-        <!-- Cabecera -->
-    </header>
+<%- include("./partials/head") %>
 
+<body>
+	<!-- Header -->
+	<%- include("./partials/header") %>
 
+	<!-- /Header -->
 
-    <main>
-        <!-- principal -->
-
-    	<h1>Agregar Producto</h1>
-    	<form action="/ProyectoIntegrador/views/product-add.ejs" method="GET">
-
-		<div class="contenedor-input">
-        	<label for="imagen">Imagen:</label>
-        	<input type="text" id="imagen" name="imagen" placeholder="Imagen de producto"required>
+	<!-- Novedades -->
+	<div class="container products-wrapper">
+		<div class="row">
+			<div class="col-12">
+				<h2 class="products-title">Agregar producto</h2>
+			</div>
+			<form action="/product/add" method="get">
+				<label for="imagen" class="label">Imagen</label>
+				<input class="form-input" type="file" name="ImagenProducto" placeholder="Imagen de producto" required>
+	
+				<label for="nombre_producto" class="label">Nombre del producto</label>
+				<input class="form-input" type="text" name="NombreProducto" placeholder="Nombre del producto" required>
+	
+				<label for="descripcion" class="label">Descripción</label>
+				<input class="form-input" type="text" name="DescripcionProducto" placeholder="Descripción" required>
+	
+				<button class="form-label" type="submit">Agregar producto</button>			 
+			</form>	
 		</div>
+	</div>
 
-		<div class="contenedor-input">
-        	<label for="nombre_producto">Nombre del Producto:</label>
-        	<input type="text" id="nombre_producto" name="nombre_producto" placeholder="Nombre del producto" required>
-		</div>
-
-		<div class="contenedor-input">
-       	 	<label for="descripcion">Descripción:</label>
-        	<input id="descripcion" name="descripcion" placeholder="Descripcion" required>
-		</div>
-
-		<div class="contenedor-input">
-			<label for="fecha_de_carga">Fecha de carga:</label>
-			<input id="fecha_de_carga" name="fecha_de_carga" placeholder="Fecha de carga" required>
-		</div>
-
-		<div class="contenedor-input">
-        <button type="submit">Agregar Producto</button>
-		</div>
-    </form>
-</main>
-
-<footer>
-	<!-- pie de pagina -->
-</footer>
-
+	<!-- footer -->
+	<%- include("./partials/footer") %>
+	<!-- /footer -->
 </body>
 </html>
+
+
+
+
+
+	
