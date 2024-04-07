@@ -452,6 +452,17 @@ hr {
   display: inline-block;
   font-size: 1.6em;
   margin: 10px 0;
+  font-family: var(--base-font-family);
+  color: #806565;
+  border: 1px solid #b79b9b;
+  border-radius: 5px;
+  background-color:#D4C1C1;
+}
+
+.label {
+  color:#5b4242;
+  font-size: 1.5em;
+  font-weight: 300;
 }
 
 .form-input {
