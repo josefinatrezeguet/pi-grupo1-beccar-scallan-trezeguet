@@ -2,10 +2,10 @@ const db = require('../db/index');
 
 const indexController = {
     index: function(req, res) {
-        res.render('index', {title: "Home", productos: db.productos});
+        res.render('index', {title: "Aura Beauty - HOME", productos: db.productos});
     },
     search: function(req, res) {
-        res.render('search-results', {title: "Search Results"});
+        res.render('search-results', {title: "Resultados de búsqueda"});
     }
 }
 

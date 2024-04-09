@@ -5,13 +5,13 @@ const usersController = {
         res.render('login', {title: "Login"});
     },
     register: function(req, res, next) {
-        res.render('register', {title: "Register"});
+        res.render('register', {title: "Registrarse"});
     },
     profile: function(req, res, next) {
-        res.render('profile', {title: "Profile"});
+        res.render('profile', {title: "Mi perfil"});
     },
     usersEdit: function(req, res, next) {
-        res.render('profile-edit', {title: "Edit Profile"});
+        res.render('profile-edit', {title: "Editar perfil"});
     }
 }
 

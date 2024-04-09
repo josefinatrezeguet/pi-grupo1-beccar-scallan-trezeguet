@@ -23,9 +23,9 @@
 				<%for (let index = 0; index < 4; index++) {%>
 					<div class="col-12 col-sm-6 col-lg-3">
 						<section class="product-box">
-							<a href="/product">
+							<a href="/product"> <!--<%= productos[index].id %>-->
 								<figure class="product-box_image">
-									<img class="fotoIndex" src=<%= productos[index].imagen %>>
+									<img src=<%= productos[index].imagen %>>
 								</figure>
 								<article class="product-box_data">
 									<h2><%= productos[index].nombre %></h2>
@@ -49,9 +49,9 @@
 				<%for (let index = 4; index < 8; index++) {%>
 					<div class="col-12 col-sm-6 col-lg-3">
 						<section class="product-box">
-							<a href="/product">
+							<a href="/product"> <!--<%= productos[index].id %>-->
 								<figure class="product-box_image">
-									<img class="fotoIndex" src=<%= productos[index].imagen %>>
+									<img src=<%= productos[index].imagen %>>
 								</figure>
 								<article class="product-box_data">
 									<h2><%= productos[index].nombre %></h2>
