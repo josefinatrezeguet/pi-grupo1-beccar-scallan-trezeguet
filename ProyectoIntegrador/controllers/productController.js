@@ -1,9 +1,11 @@
+const db = require('../db/index');
+
 const productController = {
     index: function(req, res) {
-        res.render('product');
+        res.render('product', {title: "Product Detail", productos: db.productos});
     },
     create: function(req, res) {
-        res.render('product-add');
+        res.render('product-add', {title: "Add Product"});
     }
 }
 

@@ -3,12 +3,11 @@ use proyecto_integrador;
 
 create table usuarios(
 id int unsigned primary key auto_increment,
-email varchar(50) not null,
+mail varchar(250) not null,
 contrasenia varchar(1000) not null,
 fecha date not null,
 dni int not null UNIQUE,
 fotoPerfil varchar(200),
-
 createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 deletedAt TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP 
@@ -20,11 +19,10 @@ id_usuario int unsigned,
 imagen varchar(200) not null,
 nombre varchar(100) not null,
 descripcion varchar(350) not null,
-foreign key (id_usuario) REFERENCES usuarios(id),
-
 createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-deleteAt  TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP
+deleteAt  TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP,
+foreign key (id_usuario) REFERENCES usuarios(id),
 );
 
 create table comentarios(
@@ -33,13 +31,11 @@ id int unsigned primary key auto_increment,
 id_producto INT UNSIGNED,
 id_usuario INT UNSIGNED,
 texto varchar(500) not null,
-
-foreign key (id_usuario) REFERENCES usuarios(id),
-foreign key (id_producto) REFERENCES productos(id),
-
 createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-deletedAt TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP 
+deletedAt TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP,
+foreign key (id_usuario) REFERENCES usuarios(id),
+foreign key (id_producto) REFERENCES productos(id),
 );
 
 

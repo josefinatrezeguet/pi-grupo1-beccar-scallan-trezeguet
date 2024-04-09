@@ -5,14 +5,13 @@
 
 <body>
 	<!-- Header -->
-	
-	<!-- /Header -->
 	<%- include("./partials/header") %>
+	<!-- /Header -->
 
 	<!-- product detail -->
 	<div class="container products-wrapper">
 		<div class="d-flex align-items-center">
-			<h2 class="products-title">Nombre del producto</h2> 
+			<h2 class="products-title"><%= productos[0].nombre%></h2> 
 			<p class="product-detail-description">
 				<a href="/product/add">Editar</a>
 			</p>
@@ -20,54 +19,21 @@
 		<div class="product-detail">
 			<div class="row">
 				<article class="col-12 col-lg-8 product-detail-info">
-					<img src="./images/products/default-image.png" alt="" class="product-detail-img">
-					<p class="product-detail-description">
-						Debera aparecer una descripción corta del producto. En la página principal solo se van a ver 2 líneas de la descripcion. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis labore deserunt consequatur sint asperiores, dolores libero dolor doloremque error porro hic repellat nulla minus illo, laboriosam fugiat, unde qui. Minus.
-						veritatis.</p>
+					<img src=<%= productos[0].imagen%> alt="" class="product-detail-img">
+					<p class="product-detail-description"><%= productos[0].descripcion %></p>
 				</article>
 				<div class="col-12 col-lg-4">
 					<section class="comments">
-						<article>
-							<img src="https://via.placeholder.com/35" alt="">
-							<div class="data">
-								<p class="user">
-								<strong> <a href="/profile">Nombre usuario: </a> </strong>
-								 Comentario que escribio el usuario. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam voluptatibus quidem ab.</p>
-							</div>
-						</article>
-						<article>
-							<img src="https://via.placeholder.com/35" alt="">
-							<div class="data">
-								<p class="user">
-									<strong> <a href="/profile">Nombre usuario: </a> </strong>
-									Comentario que escribio el usuario. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Assumenda dolorum est iure voluptatem.</p>
-							</div>
-						</article>
-						<article>
-							<img src="https://via.placeholder.com/35" alt="">
-							<div class="data">
-								<p class="user">
-									<strong> <a href="/profile">Nombre usuario: </a> </strong>
-									Comentario que escribio el usuario.Lorem ipsum dolor sit amet consectetur adipisicing elit.
-									</p>
-							</div>
-						</article>
-						<article>
-							<img src="https://via.placeholder.com/35" alt="">
-							<div class="data">
-								<p class="user">
-									<strong> <a href="/profile">Nombre usuario: </a> </strong>
-									Comentario que escribio el usuario. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ea, nihil.</p>
-							</div>
-						</article>
-						<article>
-							<img src="https://via.placeholder.com/35" alt="">
-							<div class="data">
-								<p class="user">
-									<strong> <a href="/profile">Nombre usuario: </a> </strong>
-									Comentario que escribio el usuario. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore consequatur aut voluptatibus commodi porro blanditiis repudiandae maxime quam, hic minus maiores rem autem ipsum!</p>
-							</div>
-						</article>
+						<%for (let index = 0; index < productos[0].comentarios.length; index++) {%>
+							<article>
+								<img src=<%=  productos[0].comentarios[index].pfp%> alt="">
+								<div class="data">
+									<p class="user">
+									<strong><a href="/users/profile"><%=productos[0].comentarios[index].user%></a></strong>
+									<%= productos[0].comentarios[index].textoComentario%></p>
+								</div>
+							</article>
+						<%}%>
 
 					</section>
 					<form class="form" action="/product" method="get">

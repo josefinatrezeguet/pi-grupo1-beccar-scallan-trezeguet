@@ -10,7 +10,7 @@
 		
 		<!-- Banner -->
 		<div class="banner">
-			<img src="images/banner.png" alt="Banner de ofertas">
+			<img src="images/banner.png">
 		</div>
 		<!-- /Banner -->
 
@@ -18,65 +18,24 @@
 		<div class="container products-wrapper">
 			<div class="row">
 				<div class="col-12">
-					<h2 class="products-title"> Nuevos lanzamientos</h2>
+					<h2 class="products-title">NUEVOS PRODUCTOS</h2>
 				</div>
-				<!-- Show the "ultimos" products -->
-				<div class="col-12 col-sm-6 col-lg-3">
-					<section class="product-box">
-						<a href="/product">
-							<figure class="product-box_image">
-								<img src="images/products/rare.png" alt="cafetera moulinex">
-							</figure>
-							<article class="product-box_data">
-								<h2>Nombre del producto</h2>
-								<p>Descripción del producto. Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio obcaecati nesciunt dolores quis officiis tenetur.x</p>
-								<p>Comentarios: 10</p>
-							</article>
-						</a>
-					</section>
-				</div>
-				<div class="col-12 col-sm-6 col-lg-3">
-					<section class="product-box">
-						<a href="/product">
-							<figure class="product-box_image">
-								<img src="images/products/sky.png" alt="cafetera moulinex">
-							</figure>
-							<article class="product-box_data">
-								<h2>Nombre del producto</h2>
-								<p>Descripción del producto. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempora doloribus aperiam totam dicta ducimus sit.</p>
-								<p>Comentarios: 10</p>
-							</article>
-						</a>
-					</section>
-				</div>
-				<div class="col-12 col-sm-6 col-lg-3">
-					<section class="product-box">
-						<a href="/product">
-							<figure class="product-box_image">
-								<img src="images/products/lifter.png" alt="cafetera moulinex">
-							</figure>
-							<article class="product-box_data">
-								<h2>Nombre del producto</h2>
-								<p>Descripción del producto. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facere, laudantium? Quae illo soluta cupiditate similique.</p>
-								<p>Comentarios: 10</p>
-							</article>
-						</a>
-					</section>
-				</div>
-				<div class="col-12 col-sm-6 col-lg-3">
-					<section class="product-box">
-						<a href="/product">
-							<figure class="product-box_image">
-								<img src="images/products/toofaced.png" alt="cafetera moulinex">
-							</figure>
-							<article class="product-box_data">
-								<h2>Nombre del producto</h2>
-								<p>Descripción del producto. Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur obcaecati hic eaque nobis quibusdam dolore!</p>
-								<p>Comentarios: 10</p>
-							</article>
-						</a>
-					</section>
-				</div>
+				<%for (let index = 0; index < 4; index++) {%>
+					<div class="col-12 col-sm-6 col-lg-3">
+						<section class="product-box">
+							<a href="/product">
+								<figure class="product-box_image">
+									<img class="fotoIndex" src=<%= productos[index].imagen %>>
+								</figure>
+								<article class="product-box_data">
+									<h2><%= productos[index].nombre %></h2>
+									<p><%= productos[index].descripcion %></p>
+									<p>Comentarios: <%= productos[index].comentarios.length %></p>
+								</article>
+							</a>
+						</section>
+					</div>
+				<%}%>
 			</div>
 		</div>
 		<!-- /Novedades -->
@@ -87,66 +46,25 @@
 					<h2 class="products-title">MÁS COMENTADOS</h2>
 				</div>
 				<!-- Show the "ultimos" products -->
-				<div class="col-12 col-sm-6 col-lg-3">
-					<section class="product-box">
-						<a href="/product">
-							<figure class="product-box_image">
-								<img src="images/products/huda.png" alt="cafetera moulinex">
-							</figure>
-							<article class="product-box_data">
-								<h2>Nombre del producto</h2>
-								<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque, magnam assumenda. Tempore ipsa fuga unde.</p>
-								<p>Comentarios: 10</p>
-							</article>
-						</a>
-					</section>
-				</div>
-				<div class="col-12 col-sm-6 col-lg-3">
-					<section class="product-box">
-						<a href="/product">
-							<figure class="product-box_image">
-								<img src="images/products/ofra.png" alt="cafetera moulinex">
-							</figure>
-							<article class="product-box_data">
-								<h2>Nombre del producto</h2>
-								<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis necessitatibus esse soluta accusantium quidem asperiores.</p>
-								<p>Comentarios: 10</p>
-							</article>
-						</a>
-					</section>
-				</div>
-				<div class="col-12 col-sm-6 col-lg-3">
-					<section class="product-box">
-						<a href="/product">
-							<figure class="product-box_image">
-								<img src="images/products/nyx.png" alt="cafetera moulinex">
-							</figure>
-							<article class="product-box_data">
-								<h2>Nombre del producto</h2>
-								<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Assumenda tenetur neque similique, dolor distinctio perspiciatis?</p>
-								<p>Comentarios: 10</p>
-							</article>
-						</a>
-					</section>
-				</div>
-				<div class="col-12 col-sm-6 col-lg-3">
-					<section class="product-box">
-						<a href="/product">
-							<figure class="product-box_image">
-								<img src="images/products/mac.png" alt="cafetera moulinex">
-							</figure>
-							<article class="product-box_data">
-								<h2>Nombre del producto</h2>
-								<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dignissimos itaque reiciendis earum neque facilis placeat.</p>
-								<p>Comentarios: 10</p>
-							</article>
-						</a>
-					</section>
-				</div>
+				<%for (let index = 4; index < 8; index++) {%>
+					<div class="col-12 col-sm-6 col-lg-3">
+						<section class="product-box">
+							<a href="/product">
+								<figure class="product-box_image">
+									<img class="fotoIndex" src=<%= productos[index].imagen %>>
+								</figure>
+								<article class="product-box_data">
+									<h2><%= productos[index].nombre %></h2>
+									<p><%= productos[index].descripcion %></p>
+									<p>Comentarios: <%= productos[index].comentarios.length %></p>
+								</article>
+							</a>
+						</section>
+					</div>
+				<%}%>
 			</div>
-		</div>
+		</div>		
 		<!-- /Más comentados -->
-
 
 		<!-- footer -->
 		<%- include("./partials/footer") %>
