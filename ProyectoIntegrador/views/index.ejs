@@ -23,7 +23,7 @@
 				<%for (let index = 0; index < 4; index++) {%>
 					<div class="col-12 col-sm-6 col-lg-3">
 						<section class="product-box">
-							<a href="/product"> <!--<%= productos[index].id %>-->
+							<a href="/product"> 
 								<figure class="product-box_image">
 									<img src=<%= productos[index].imagen %>>
 								</figure>
@@ -39,17 +39,17 @@
 			</div>
 		</div>
 		<!-- /Novedades -->
+		
 		<!-- Más comentados -->
 		<div class="container products-wrapper">
 			<div class="row">
 				<div class="col-12">
 					<h2 class="products-title">MÁS COMENTADOS</h2>
 				</div>
-				<!-- Show the "ultimos" products -->
 				<%for (let index = 4; index < 8; index++) {%>
 					<div class="col-12 col-sm-6 col-lg-3">
 						<section class="product-box">
-							<a href="/product"> <!--<%= productos[index].id %>-->
+							<a href="/product">
 								<figure class="product-box_image">
 									<img src=<%= productos[index].imagen %>>
 								</figure>
