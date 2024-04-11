@@ -45,6 +45,13 @@ a {
   color: #f1eaea;
 }
 
+.logout {
+  display: inline-block;
+  text-decoration: none;
+  color: #f1eaea;
+  font-family: var(--base-font-family);
+}
+
 figure {
   margin: 0;
   padding: 0;
@@ -448,6 +455,7 @@ hr {
 }
 
 /*====== Formularios ======*/
+
 .form-label {
   display: inline-block;
   font-size: 1.6em;
@@ -486,6 +494,23 @@ textarea.form-input {
   min-height: 140px;
   resize: vertical;
   padding: 15px;
+}
+
+.input-file {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  color: #806565;
+}
+
+::-webkit-file-upload-button {
+  display: inline-block;
+  font-size: 14px;
+  margin-right: 8px;
+  font-family: var(--base-font-family);
+  color: #806565;
+  border: 1px solid #b79b9b;
+  border-radius: 5px;
+  background-color:#D4C1C1;
 }
 
 /*====== Profile ======*/
