@@ -1,11 +1,12 @@
 const db = {
     usuario: {
+        nombre: "Emilia Mernes",
         email:"emiliamernes@gmail.com",
         usuario: "emimernes",  
         contrasenia: "Duki123",
         nacimiento: "29/10/1996",
         dni: "46442824",
-        fotoPerfil: ""
+        fotoPerfil: "images/users/1.png"
     },
 
     productos: [
