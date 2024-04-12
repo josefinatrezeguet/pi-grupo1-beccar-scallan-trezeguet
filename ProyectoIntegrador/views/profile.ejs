@@ -7,6 +7,16 @@
 <body>
 	<!-- Header -->
 	<%- include("./partials/headerLogueado") %>
+	<div class="nombre-usuario">
+    <%= userData.nombreUsuario %>
+</div>
+<div class="email-usuario">
+    <%= userData.email %>
+</div>
+<div class="foto-perfil">
+    <img src="<%= userData.fotoPerfil %>" alt="Foto de perfil">
+</div>
+
 	<!-- /Header -->
 
 	<!-- Datos del usuario -->
