@@ -75,6 +75,10 @@ hr {
   max-width: 95%;
 }
 
+li {
+  color: #5b4242;
+}
+
 
 /*====== Main Header ======*/
 .main-header {
@@ -356,6 +360,7 @@ hr {
   padding: 15px 15px 15px 40px;
   font-size: 1.8em;
   line-height: 1.5;
+  color: #5b4242;
 }
 
 .product-detail-price {
@@ -452,6 +457,7 @@ hr {
 }
 .comments .user{
   font-size: 1.7em;
+  color: #5b4242;
 }
 
 /*====== Formularios ======*/
@@ -522,18 +528,26 @@ textarea.form-input {
 
 .foto-perfil{
   border-radius: 50%;
+
 }
 
 .main-title{
   font-size: 25px;
   margin-bottom: 10px;
+  font-family: var(--base-font-family);
+  font-weight: lighter;
+  color: #5b4242;
 }
 
 .btn{
-  background-color: #1259c3;
+  background-color: var(--light-blue);
   padding: 10px 20px;
   border-radius: 4px;
   color: #fff;
+}
+
+.email {
+  font-weight: 600;
 }
 
 

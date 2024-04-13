@@ -6,7 +6,7 @@ const db = {
         contrasenia: "Duki123",
         nacimiento: "29/10/1996",
         dni: "46442824",
-        fotoPerfil: "images/users/1.png"
+        fotoPerfil: "/images/users/emilia.png"
     },
 
     productos: [

@@ -13,11 +13,11 @@
 	<section class="info-usuario container products-wrapper">
 		<div class="row">
 			<div class="img-container offset-3 col-2">
-				<img src="<%= usuario.fotoPerfil %>" alt="foto de perfil" class="foto-perfil">
+				<img src="<%- usuario.fotoPerfil %>" class="foto-perfil">
 			</div>
 			<div class="data-container col-6">
 				<div class="d-flex align-items-center ">
-					<h1 class="main-title"><%= usuario.nombre %>
+					<h1 class="main-title"><%- usuario.nombre %>
 						<a href="/users/edit">
 							<i class="fas fa-cog"></i>
 						</a>
@@ -25,7 +25,12 @@
 					<a class="btn mt-3 ml-4" href="">SEGUIR</a>
 				</div>
 				<div>
-					<ul class="">
+					<ul>
+						<li class="email"><%- usuario.email %></li>
+					</ul>
+				</div><br>
+				<div>
+					<ul>
 						<li> 12 productos</li>
 						<li> 150 seguidores</li>
 						<li> 200 comentarios</li>
@@ -37,126 +42,6 @@
 	<!-- /Datos del usuario -->
 
 	<!-- Mis productos -->
-	<div class="container products-wrapper">
-		<div class="row">
-			<div class="col-12">
-				<h2 class="products-title">Mis productos</h2>
-			</div>
-			<!-- Show mis productos -->
-			<div class="col-12 col-sm-6 col-lg-3">
-				<section class="product-box">
-					<a href="/product">
-						<figure class="product-box_image">
-							<img src="images/products/default-image.png" alt="cafetera moulinex">
-						</figure>
-						<article class="product-box_data">
-							<h2>Nombre del producto</h2>
-							<p>Descripción del producto. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis nihil atque veniam autem beatae id?</p>
-							<p>Comentarios: 10</p>
-						</article>
-					</a>
-				</section>
-			</div>
-			<div class="col-12 col-sm-6 col-lg-3">
-				<section class="product-box">
-					<a href="/product">
-						<figure class="product-box_image">
-							<img src="images/products/default-image.png" alt="cafetera moulinex">
-						</figure>
-						<article class="product-box_data">
-							<h2>Nombre del producto</h2>
-							<p>Descripción del producto Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident, consectetur!</p>
-							<p>Comentarios: 10</p>
-						</article>
-					</a>
-				</section>
-			</div>
-			<div class="col-12 col-sm-6 col-lg-3">
-				<section class="product-box">
-					<a href="/product">
-						<figure class="product-box_image">
-							<img src="images/products/default-image.png" alt="cafetera moulinex">
-						</figure>
-						<article class="product-box_data">
-							<h2>Nombre del producto</h2>
-							<p>Descripción del producto. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed, sequi.</p>
-							<p>Comentarios: 10</p>
-						</article>
-					</a>
-				</section>
-			</div>
-			<div class="col-12 col-sm-6 col-lg-3">
-				<section class="product-box">
-					<a href="/product">
-						<figure class="product-box_image">
-							<img src="images/products/default-image.png" alt="cafetera moulinex">
-						</figure>
-						<article class="product-box_data">
-							<h2>Nombre del producto</h2>
-							<p>Descripción del producto. Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit earum repellendus eaque id quaerat. Ipsam!x</p>
-							<p>Comentarios: 10</p>
-						</article>
-					</a>
-				</section>
-			</div>
-			<div class="col-12 col-sm-6 col-lg-3">
-				<section class="product-box">
-					<a href="/product">
-						<figure class="product-box_image">
-							<img src="images/products/default-image.png" alt="cafetera moulinex">
-						</figure>
-						<article class="product-box_data">
-							<h2>Nombre del producto</h2>
-							<p>Descripción del producto. Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita cum, sed porro temporibus asperiores voluptatem!</p>
-							<p>Comentarios: 10</p>
-						</article>
-					</a>
-				</section>
-			</div>
-			<div class="col-12 col-sm-6 col-lg-3">
-				<section class="product-box">
-					<a href="/product">
-						<figure class="product-box_image">
-							<img src="images/products/default-image.png" alt="cafetera moulinex">
-						</figure>
-						<article class="product-box_data">
-							<h2>Nombre del producto</h2>
-							<p>Descripción del producto. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam corrupti est odio explicabo, fugiat illum.x</p>
-							<p>Comentarios: 10</p>
-						</article>
-					</a>
-				</section>
-			</div>
-			<div class="col-12 col-sm-6 col-lg-3">
-				<section class="product-box">
-					<a href="/product">
-						<figure class="product-box_image">
-							<img src="images/products/default-image.png" alt="cafetera moulinex">
-						</figure>
-						<article class="product-box_data">
-							<h2>Nombre del producto</h2>
-							<p>Descripción del producto. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut quo veniam, deserunt facilis architecto cupiditate.</p>
-							<p>Comentarios: 10</p>
-						</article>
-					</a>
-				</section>
-			</div>
-			<div class="col-12 col-sm-6 col-lg-3">
-				<section class="product-box">
-					<a href="/product">
-						<figure class="product-box_image">
-							<img src="images/products/default-image.png" alt="cafetera moulinex">
-						</figure>
-						<article class="product-box_data">
-							<h2>Nombre del producto</h2>
-							<p>Descripción del producto. Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quasi culpa perspiciatis, enim adipisci debitis.x</p>
-							<p>Comentarios: 10</p>
-						</article>
-					</a>
-				</section>
-			</div>
-		</div>
-	</div>
 	<!-- /Mis productos -->
 
 
