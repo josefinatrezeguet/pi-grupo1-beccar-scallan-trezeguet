@@ -42,6 +42,29 @@
 	<!-- /Datos del usuario -->
 
 	<!-- Mis productos -->
+	<div class="container products-wrapper">
+		<div class="row">
+			<div class="col-12">
+				<h2 class="products-title">Mis productos</h2>
+			</div>
+			<%for (let index = 0; index < 4; index++) {%>
+				<div class="col-12 col-sm-6 col-lg-3">
+					<section class="product-box">
+						<a href="/product"> 
+							<figure class="product-box_image">
+								<img src=<%= productos[index].imagen %>>
+							</figure>
+							<article class="product-box_data">
+								<h2><%= productos[index].nombre %></h2>
+								<p><%= productos[index].descripcion %></p>
+								<p>Comentarios: <%= productos[index].comentarios.length %></p>
+							</article>
+						</a>
+					</section>
+				</div>
+			<%}%>
+		</div>
+	</div>
 	<!-- /Mis productos -->
 
 

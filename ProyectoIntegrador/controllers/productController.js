@@ -5,7 +5,7 @@ const productController = {
         res.render('product', {title: "Detalle del producto", productos: db.productos});
     },
     create: function(req, res) {
-        res.render('product-add', {title: "Añadir producto"});
+        res.render('product-add', {title: "Añadir producto", usuario: db.usuario});
     }
 }
 

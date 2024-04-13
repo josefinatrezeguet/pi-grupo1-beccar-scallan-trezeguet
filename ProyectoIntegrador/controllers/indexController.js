@@ -5,7 +5,7 @@ const indexController = {
         res.render('index', {title: "Aura Beauty", productos: db.productos});
     },
     search: function(req, res) {
-        res.render('search-results', {title: "Resultados de búsqueda"});
+        res.render('search-results', {title: "Resultados de búsqueda", productos: db.productos});
     }
 }
 

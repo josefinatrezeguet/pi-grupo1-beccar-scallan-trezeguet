@@ -8,11 +8,10 @@ const usersController = {
         res.render('register', {title: "Registrarse"});
     },
     profile: function(req, res, next) {
-        const usuario = db.usuario; 
-        res.render('profile', { title: "Mi perfil", usuario });
+        res.render('profile', {title: "Mi perfil", usuario: db.usuario, productos: db.productos});
     }, 
     usersEdit: function(req, res, next) {
-        res.render('profile-edit', {title: "Editar perfil"});
+        res.render('profile-edit', {title: "Editar perfil", usuario: db.usuario});
     }
 }
 

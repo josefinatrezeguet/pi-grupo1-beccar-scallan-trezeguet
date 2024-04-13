@@ -12,7 +12,7 @@ const db = {
     productos: [
         {
             id: 1,
-            imagen: "images/products/rare.png",
+            imagen: "/images/products/rare.png",
             nombre: "Blush Líquido - Rare Beauty",
             descripcion: "Un rubor ligero y duradero que se mezcla y se construye maravillosamente para un acabado suave y saludable.",
             comentarios: [
@@ -46,7 +46,7 @@ const db = {
  
         {
             id: 2,
-            imagen: "images/products/sky.png",
+            imagen: "/images/products/sky.png",
             nombre: "Sky High - Maybelline",
             descripcion: "Máscara de pestañas acondicionadora con una fórmula que espesa, alarga y bloquea los rizos para obtener pestañas dramáticas con un volumen extremo.",
             comentarios: [
@@ -79,7 +79,7 @@ const db = {
         },
         {
             id: 3,
-            imagen: "images/products/lifter.png",
+            imagen: "/images/products/lifter.png",
             nombre: "Lifter Gloss - Maybelline",
             descripcion: "Los labios se ven más llenos y voluminosos después de aplicar este gloss vibrante y de alto brillo.",
             comentarios: [
@@ -112,7 +112,7 @@ const db = {
         },
         {
             id: 4,
-            imagen: "images/products/toofaced.png",
+            imagen: "/images/products/toofaced.png",
             nombre: "Born This Way - Too Faced",
             descripcion: "Una base ligera sin aceite que difumina magistralmente la línea entre el maquillaje y la piel para una cobertura impecable.",
             comentarios: [
@@ -145,7 +145,7 @@ const db = {
         },
         {
             id: 5,
-            imagen: "images/products/huda.png",
+            imagen: "/images/products/huda.png",
             nombre: "Paleta de sombras - Huda Beauty",
             descripcion: "Una paleta que te permite jugar y crear looks de maquillaje con 18 tonos rosados y terrosos en cinco texturas diferentes.",
             comentarios: [
@@ -178,7 +178,7 @@ const db = {
         },
         {
             id: 6,
-            imagen: "images/products/ofra.png",
+            imagen: "/images/products/ofra.png",
             nombre: "Highlighter - OFRA",
             descripcion: "Un iluminador en polvo que destaca instantáneamente la tez y aumenta su brillo natural.",
             comentarios: [
@@ -211,7 +211,7 @@ const db = {
         },
         {
             id: 7,
-            imagen: "images/products/nyx.png",
+            imagen: "/images/products/nyx.png",
             nombre: "Bare With Me - NYX",
             descripcion: "Un corrector que contiene un 90 por ciento de ingredientes de origen natural para iluminar visiblemente las ojeras y minimizar las líneas finas.",
             comentarios: [
@@ -244,7 +244,7 @@ const db = {
         },
         {
             id: 8, 
-            imagen: "images/products/mac.png",
+            imagen: "/images/products/mac.png",
             nombre: "Base - MAC Studio",
             descripcion: "Una base transpirable y luminosa que se construye y combina sin esfuerzo para iluminar la tez con una cobertura personalizable y de larga duración.",
             comentarios: [
@@ -277,7 +277,7 @@ const db = {
         },
         {
             id: 9,
-            imagen: "images/products/dior.png",
+            imagen: "/images/products/dior.png",
             nombre: "Lip Oil - Dior",
             descripcion: "Un aceite labial nutritivo y brillante que protege y mejora los labios, resaltando su color natural.",
             comentarios: [
@@ -310,7 +310,7 @@ const db = {
         },
         {
             id: 10,
-            imagen: "images/products/rhode.png",
+            imagen: "/images/products/rhode.png",
             nombre: "Lip Gloss - Rhode",
             descripcion: "Un brillo labial antiadherente y de larga duración, con una fórmula clara y ligera que ayuda a nutrir y suavizar los labios.",
             comentarios: [
