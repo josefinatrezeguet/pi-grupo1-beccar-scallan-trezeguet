@@ -51,15 +51,16 @@ CREATE TABLE comentarios (
 );
 
 -- USUARIOS al menos 5 --
-INSERT INTO usuarios (id,       mail,                    contrasenia,  fecha,         dni,         fotoPerfil,           createdAt,     updatedAt,      deletedAt)
+INSERT INTO usuarios (id,       mail,                    contrasenia,  fecha,         dni,         fotoPerfil)
 VALUES               (default,  'laliespo@gmail.com',    '123456',     '2024/10/20',  '46442824',  'images/users/1.png', );
                      (default,  'tinitini@hotmail.com',  '123456',     '2023/10/20',  '45442824',  'images/users/2.png', );
                      (default,  'antorocuzzo@gmail.com', '123456',     '2022/10/20',  '44442824',  'images/users/3.png',);
                      (default,  'orisabatini@gmail.com', '123456',     '2021/10/20',  '43442824',  'images/users/4.png', );
                      (default,  'natiperez@gmail.com',   '123456',     '2020/10/20',  '42442824',  'images/users/5.png', );
 
+
 -- PRODUCTOS al menos 10 --
-INSERT INTO productos (id,      id_usuario, imagen,                         nombre,                             descripcion,                                                                                                                                            createdAt, updatedAt, deletedAt)
+INSERT INTO productos (id,      id_usuario, imagen,                         nombre,                             descripcion)
 VALUES                (default, 1,          'images/products/rare.png',     'Blush Líquido - Rare Beauty',     'Un rubor ligero y duradero que se mezcla y se construye maravillosamente para un acabado suave y saludable.', );
                       (default, 1,          'images/products/sky.png',      'Sky High - Maybelline',           'Máscara de pestañas acondicionadora con una fórmula que espesa, alarga y bloquea los rizos para obtener pestañas dramáticas con un volumen extremo.', );
                       (default, 2,          'images/products/lifter.png',   'Lifter Gloss - Maybelline',       'Los labios se ven más llenos y voluminosos después de aplicar este gloss vibrante y de alto brillo.', );
@@ -71,8 +72,9 @@ VALUES                (default, 1,          'images/products/rare.png',     'Blu
                       (default, 5,          'images/products/dior.png',     'Lip Oil - Dior',                  'Un aceite labial nutritivo y brillante que protege y mejora los labios, resaltando su color natural.', );
                       (default, 5,          'images/products/rhode.png',    'Lip Gloss - Rhode',               'Un brillo labial antiadherente y de larga duración, con una fórmula clara y ligera que ayuda a nutrir y suavizar los labios.', );
 
+
 -- COMENTARIOS al menos 30 --
-INSERT INTO comentarios (id,      id_producto, id_usuario, texto, createdAt, updatedAt, deletedAt)
+INSERT INTO comentarios (id,      id_producto, id_usuario, texto)
 VALUES                  (default, 1,           1,          'Este blush líquido es ideal para un look natural y fresco! Me encanta cómo se mezcla sin esfuerzo en mi piel. 💕', );
                         (default, 1,           2,          '¡Increíble! Este blush líquido de Rare Beauty es tan fácil de aplicar y el acabado es impecable. Definitivamente se ha convertido en mi nuevo favorito. 😊', );
                         (default, 1,           3,          '¡El blush líquido de Rare Beauty es una verdadera joya! La pigmentación es excelente y el color se ve tan natural. ¡Me encanta! ✨', );
