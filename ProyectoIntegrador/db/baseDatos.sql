@@ -55,8 +55,8 @@ CREATE TABLE comentarios (
 
 -- USUARIOS al menos 5 --
 INSERT INTO usuarios (id,       mail,                    contrasenia,  fecha,         dni,         fotoPerfil,      createdAt,      updatedAt,     deletedAt )
-VALUES               (default,  'laliespo@gmail.com',    '123456',     '2024/10/20',  '46442824',  'images/users/1.png',default, default, null );
-                     (default,  'tinitini@hotmail.com',  '123456',     '2023/10/20',  '45442824',  'images/users/2.png',default, default, null );
+VALUES               (default,  'laliespo@gmail.com',    '123456',     '2024/10/20',  '46442824',  'images/users/1.png', default, default, null);
+                     (default,  'tinitini@hotmail.com',  '123456',     '2023/10/20',  '45442824',  'images/users/2.png', default, default, null);
                      (default,  'antorocuzzo@gmail.com', '123456',     '2022/10/20',  '44442824',  'images/users/3.png', default, default, null);
                      (default,  'orisabatini@gmail.com', '123456',     '2021/10/20',  '43442824',  'images/users/4.png', default, default, null);
                      (default,  'natiperez@gmail.com',   '123456',     '2020/10/20',  '42442824',  'images/users/5.png', default, default, null);
@@ -66,10 +66,10 @@ VALUES               (default,  'laliespo@gmail.com',    '123456',     '2024/10/
 INSERT INTO productos (id,      id_usuario, imagen,                         nombre,                             descripcion,                                createdAt,        updatedAt,   deletedAt)
 VALUES                (default, 1,          'images/products/rare.png',     'Blush Líquido - Rare Beauty',     'Un rubor ligero y duradero que se mezcla y se construye maravillosamente para un acabado suave y saludable.', default, default, null);
                       (default, 1,          'images/products/sky.png',      'Sky High - Maybelline',           'Máscara de pestañas acondicionadora con una fórmula que espesa, alarga y bloquea los rizos para obtener pestañas dramáticas con un volumen extremo.',default, default, null );
-                      (default, 2,          'images/products/lifter.png',   'Lifter Gloss - Maybelline',       'Los labios se ven más llenos y voluminosos después de aplicar este gloss vibrante y de alto brillo.', default, default, null );
+                      (default, 2,          'images/products/lifter.png',   'Lifter Gloss - Maybelline',       'Los labios se ven más llenos y voluminosos después de aplicar este gloss vibrante y de alto brillo.', default, default, null);
                       (default, 2,          'images/products/toofaced.png', 'Born This Way - Too Faced',       'Una base ligera sin aceite que difumina magistralmente la línea entre el maquillaje y la piel para una cobertura impecable.', default, default, null );
                       (default, 3,          'images/products/huda.png',     'Paleta de sombras - Huda Beauty', 'Una paleta que te permite jugar y crear looks de maquillaje con 18 tonos rosados y terrosos en cinco texturas diferentes.',default, default, null );
-                      (default, 3,          'images/products/ofra.png',     'Highlighter - OFRA',              'Un iluminador en polvo que destaca instantáneamente la tez y aumenta su brillo natural.', default, default, null );
+                      (default, 3,          'images/products/ofra.png',     'Highlighter - OFRA',              'Un iluminador en polvo que destaca instantáneamente la tez y aumenta su brillo natural.', default, default, null);
                       (default, 4,          'images/products/nyx.png',      'Bare With Me - NYX',              'Un corrector que contiene un 90 por ciento de ingredientes de origen natural para iluminar visiblemente las ojeras y minimizar las líneas finas.',default, default, null );
                       (default, 4,          'images/products/mac.png',      'Base - MAC Studio',               'Una base transpirable y luminosa que se construye y combina sin esfuerzo para iluminar la tez con una cobertura personalizable y de larga duración.',default, default, null );
                       (default, 5,          'images/products/dior.png',     'Lip Oil - Dior',                  'Un aceite labial nutritivo y brillante que protege y mejora los labios, resaltando su color natural.', default, default, null);
