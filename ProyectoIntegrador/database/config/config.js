@@ -3,21 +3,21 @@ module.exports =
   "development": {
     "username": "root",
     "password": "root",
-    "database": "", 
+    "database": "proyecto_integrador",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
     "password": "root",
-    "database": "database_test",
+    "database": "proyecto_integrador",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
     "password": "root",
-    "database": "database_production",
+    "database": "proyecto_integrador",
     "host": "127.0.0.1",
     "dialect": "mysql"
   }
