@@ -1,3 +1,10 @@
+//require express-session
+var session = require('express-session');
+app.use(session( { secret: "Nuestro mensaje secreto",
+				resave: false,
+				saveUninitialized: true }));
+
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
