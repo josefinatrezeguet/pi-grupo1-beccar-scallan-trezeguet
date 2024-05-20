@@ -2,10 +2,23 @@ const db = require('../database/models');
 
 const indexController = {
     index: function(req, res) {
-        res.render('index', {title: "Aura Beauty", productos: null});
+        db.Producto.findAll()
+        .then(function(results){
+            return res.render('index', {title: "Aura Beauty", productos: null});
+        })
+        .catch(function(error){
+            console.log(error);
+        });
     },
+    
     search: function(req, res) {
-        res.render('search-results', {title: "Resultados de búsqueda", productos: null});
+        db.Producto.findAll()
+        .then(function(results){
+            return res.render('search-results', {title: "Resultados de búsqueda", productos: null});
+        })
+        .catch(function(error){
+            console.log(error);
+        });
     }
 }
 
