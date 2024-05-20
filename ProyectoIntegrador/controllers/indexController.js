@@ -4,7 +4,7 @@ const indexController = {
     index: function(req, res) {
         db.Producto.findAll()
         .then(function(results){
-            return res.render('index', {title: "Aura Beauty", productos: null});
+            return res.render('index', {title: "Aura Beauty", productos: results});
         })
         .catch(function(error){
             console.log(error);
@@ -14,7 +14,7 @@ const indexController = {
     search: function(req, res) {
         db.Producto.findAll()
         .then(function(results){
-            return res.render('search-results', {title: "Resultados de búsqueda", productos: null});
+            return res.render('search-results', {title: "Resultados de búsqueda", productos: results});
         })
         .catch(function(error){
             console.log(error);
