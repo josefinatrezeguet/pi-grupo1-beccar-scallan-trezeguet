@@ -2,10 +2,7 @@ const db = require('../database/models');
 
 const productController = {
     index: function(req, res) {
-
         let id = req.params.id;
-        
-        
         let comentarios;
         let productos;
 
@@ -28,7 +25,7 @@ const productController = {
 
         db.Usuario.findOne()
             .then(function(results){
-                return res.render('product-add', {title:"añadir producto", usuario: results});
+                return res.render('product-add', {title:"Añadir producto", usuario: results});
             })
             .catch(function(error){
                 console.log(error);
