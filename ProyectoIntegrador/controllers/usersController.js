@@ -5,6 +5,7 @@ const usersController = {
         return res.render('login', {title: "Login"});
     },
     register: function(req, res, next) {
+        res.cookie('usuario', 'Rocio Beccar Varela',{ maxAge: 1000 * 60 * 5 })
         return res.render('register', {title: "Registrarse"});
     },
     profile: function(req, res, next) {
