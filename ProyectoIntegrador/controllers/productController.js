@@ -4,7 +4,7 @@ const productController = {
     index: function(req, res) {
 
         let id = req.params.id;
-
+        
         
         let comentarios;
         let productos;
