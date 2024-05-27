@@ -4,6 +4,10 @@ const usersController = {
     login: function(req, res, next) {
         return res.render('login', {title: "Login"});
     },
+    logout: function(req, res, next) {
+        req.session.destroy()
+        return res.redirect("/");
+    },
     register: function(req, res, next) {
         res.cookie('usuario', 'Rocio Beccar Varela',{ maxAge: 1000 * 60 * 5 })
         return res.render('register', {title: "Registrarse"});
