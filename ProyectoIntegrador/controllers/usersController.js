@@ -19,7 +19,11 @@ const usersController = {
         db.Usuario.findOne()
             .then(function(results){
                 usuario = results; 
-                return db.Producto.findAll(); 
+                return db.Producto.findAll({
+                        include: [ 
+                        {association: "producto"},
+                        {association: "comentario", include: [ {association: "producto"}, {association:"usuario"}]}]
+                }); 
             })
             .then(function(results){
                 productos = results;

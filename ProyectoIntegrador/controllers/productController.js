@@ -5,12 +5,16 @@ const productController = {
         let id = req.params.id;
         let comentarios;
         let productos;
+        
 
         db.Producto.findByPk(id)
         .then(function(results){
             productos = results;
             return db.Comentario.findAll({
                 limit: 5,
+                include: [ 
+                {association: "usuario"},
+                {association: "comentario", include: [ {association: "usuario"}, {association:"producto"}]}]
             });
         })
         .then(function(results){

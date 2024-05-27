@@ -2,7 +2,9 @@ const db = require('../database/models');
 
 const indexController = {
     index: function(req, res) {
-        db.Producto.findAll()
+        db.Producto.findAll({
+            include: [{association: 'usuario'}]
+        })
         .then(function(results){
             return res.render('index', {title: "Aura Beauty", productos: results});
         })
