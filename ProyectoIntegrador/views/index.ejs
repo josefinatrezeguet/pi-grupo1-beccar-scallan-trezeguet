@@ -21,22 +21,22 @@
 				<div class="col-12">
 					<h2 class="products-title">NUEVOS PRODUCTOS</h2>
 				</div>
-				<%for (let index = 0; index < 4; index++) {%>
+				<% productos.forEach(function(producto, index) { %>
 					<div class="col-12 col-sm-6 col-lg-3">
 						<section class="product-box">
-							<a href="/product"> 
+							<a href="/product/id/<%= producto.id %>">
 								<figure class="product-box_image">
-									<img src=<%= productos[index].imagen %>>
+									<img src=<%= producto.imagen %>>
 								</figure>
 								<article class="product-box_data">
-									<h2><%= productos[index].nombre %></h2>
-									<p><%= productos[index].descripcion %></p>
-									<p>Comentarios: <%= productos[index].comentarios.length %></p>
+									<h2><%= producto.nombre %></h2>
+									<p><%= producto.descripcion %></p>
+									<p>Comentarios:</p>
 								</article>
 							</a>
 						</section>
 					</div>
-				<%}%>
+				<% }); %>
 			</div>
 		</div>
 		<!-- /Novedades -->
@@ -47,24 +47,24 @@
 				<div class="col-12">
 					<h2 class="products-title">MÁS COMENTADOS</h2>
 				</div>
-				<%for (let index = 4; index < 8; index++) {%>
+				<% productos.forEach(function(producto, index) { %>
 					<div class="col-12 col-sm-6 col-lg-3">
 						<section class="product-box">
-							<a href="/product">
+							<a href="/product/id/<%= producto.id %>">
 								<figure class="product-box_image">
-									<img src=<%= productos[index].imagen %>>
+									<img src=<%= producto.imagen %>>
 								</figure>
 								<article class="product-box_data">
-									<h2><%= productos[index].nombre %></h2>
-									<p><%= productos[index].descripcion %></p>
-									<p>Comentarios: <%= productos[index].comentarios.length %></p>
+									<h2><%= producto.nombre %></h2>
+									<p><%= producto.descripcion %></p>
+									<p>Comentarios:</p>
 								</article>
 							</a>
 						</section>
 					</div>
-				<%}%>
+				<% }); %>
 			</div>
-		</div>		
+		</div>
 		<!-- /Más comentados -->
 
 		<!-- footer -->

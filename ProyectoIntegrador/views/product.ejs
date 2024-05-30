@@ -12,7 +12,7 @@
 	<!-- product detail -->
 	<div class="container products-wrapper">
 		<div class="d-flex align-items-center">
-			<h2 class="products-title"><%= productos[0].nombre%></h2> 
+			<h2 class="products-title"><%= productos.nombre%></h2> 
 			<p class="product-detail-description">
 				<a href="/product/add">Editar</a>
 			</p>
@@ -20,21 +20,21 @@
 		<div class="product-detail">
 			<div class="row">
 				<article class="col-12 col-lg-8 product-detail-info">
-					<img src=<%= productos[0].imagen%> class="product-detail-img">
+					<img src=<%= productos.imagen%> class="product-detail-img">
 					<p class="product-detail-description"><%= productos[0].descripcion %></p>
 				</article>
 				<div class="col-12 col-lg-4">
 					<section class="comments">
-						<%for (let index = 0; index < productos[0].comentarios.length; index++) {%>
+						<% comentarios.forEach(function(comentario, index) { %>
 							<article>
-								<img src=<%= productos[0].comentarios[index].foto%> alt="">
+								<img src=> alt="">
 								<div class="data">
 									<p class="user">
-									<strong><a href="/users/profile"><%=productos[0].comentarios[index].usuario%></a></strong>
-									<%= productos[0].comentarios[index].coment%></p>
+									<strong><a href="/users/profile"><%=comentario.id_usuario%></a></strong>
+									<%= comentario.texto%></p>
 								</div>
 							</article>
-						<%}%>
+						<% }); %>
 
 					</section>
 					<form class="form" action="/product" method="get">

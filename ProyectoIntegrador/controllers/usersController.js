@@ -9,7 +9,6 @@ const usersController = {
         return res.redirect("/");
     },
     register: function(req, res, next) {
-        res.cookie('usuario', 'Rocio Beccar Varela',{ maxAge: 1000 * 60 * 5 })
         return res.render('register', {title: "Registrarse"});
     },
     profile: function(req, res, next) {
@@ -19,11 +18,7 @@ const usersController = {
         db.Usuario.findOne()
             .then(function(results){
                 usuario = results; 
-                return db.Producto.findAll({
-                        include: [ 
-                        {association: "producto"},
-                        {association: "comentario", include: [ {association: "producto"}, {association:"usuario"}]}]
-                }); 
+                return db.Producto.findAll(); 
             })
             .then(function(results){
                 productos = results;

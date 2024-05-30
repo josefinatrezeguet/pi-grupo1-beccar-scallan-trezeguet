@@ -6,7 +6,6 @@ const productController = {
         let comentarios;
         let productos;
         
-
         db.Producto.findByPk(id)
         .then(function(results){
             productos = results;
