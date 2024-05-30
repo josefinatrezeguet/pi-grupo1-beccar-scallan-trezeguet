@@ -12,9 +12,6 @@ const productController = {
             productos = results;
             return db.Comentario.findAll({
                 limit: 5,
-                include: [ 
-                {association: "usuario"},
-                {association: "comentario", include: [ {association: "usuario"}, {association:"producto"}]}]
             });
         })
         .then(function(results){
