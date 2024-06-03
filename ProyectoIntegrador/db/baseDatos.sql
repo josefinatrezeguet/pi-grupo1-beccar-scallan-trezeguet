@@ -1,51 +1,62 @@
 create schema proyecto_integrador;
+
 use proyecto_integrador;
 
-create table usuarios(
-id int unsigned primary key auto_increment,
-email varchar(50) not null,
-contrasenia varchar(1000) not null,
-fecha date not null,
-dni int not null UNIQUE,
-fotoPerfil varchar(200),
+CREATE TABLE usuarios (
 
-createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-deletedAt TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP 
+/*  Columna 	        Tipo de dato 	    Restricciones */
+
+    id 			        INT 		          UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    mail 		        VARCHAR(250) 	    NOT NULL,
+    contrasenia 	  VARCHAR(1000) 	  NOT NULL,
+    fecha 	        DATE 		          NOT NULL,
+    dni 	          INT 		          NOT NULL, UNIQUE,
+    fotoPerfil 	    VARCHAR(250) 	    NOT NULL,
+
+    createdAt 		  TIMESTAMP 	      DEFAULT CURRENT_TIMESTAMP ,
+    updatedAt 		  TIMESTAMP 	      DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    deletedAt		    TIMESTAMP         NULL ON UPDATE CURRENT_TIMESTAMP, 
 );
 
-create table productos(
-id int unsigned primary key auto_increment,
-id_usuario int unsigned,
-imagen varchar(200) not null,
-nombre varchar(100) not null,
-descripcion varchar(350) not null,
-foreign key (id_usuario) REFERENCES usuarios(id),
+CREATE TABLE productos (
 
-createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-deleteAt  TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP
+/*  Columna 	        Tipo de dato 	    Restricciones */
+
+    id 			            INT 		          UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    id_usuario          INT			          UNSIGNED,
+    imagen              VARCHAR(250) 	    NOT NULL,
+    nombre              VARCHAR(250) 	    NOT NULL,
+    descripcion         VARCHAR(350) 	    NOT NULL,
+
+    createdAt 		      TIMESTAMP 	      DEFAULT CURRENT_TIMESTAMP ,
+    updatedAt 	      	TIMESTAMP 	      DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    deleteAt	        	TIMESTAMP         NULL ON UPDATE CURRENT_TIMESTAMP, 
+
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id),
 );
 
 ALTER TABLE productos CHANGE COLUMN deleteAt deletedAt TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP; -- tuvimos un error en el nombre de la columna y lo corregimos --
 
-create table comentarios(
+CREATE TABLE comentarios (
 
-id int unsigned primary key auto_increment,
-id_producto INT UNSIGNED,
-id_usuario INT UNSIGNED,
-texto varchar(500) not null,
+/*  Columna         Tipo de dato 	    Restricciones */
 
-foreign key (id_usuario) REFERENCES usuarios(id),
-foreign key (id_producto) REFERENCES productos(id),
+    id 			      INT 		          UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    id_producto		INT		            UNSIGNED,
+    id_usuario		INT		            UNSIGNED,
+    texto 		    VARCHAR(500) 	    NOT NULL,
 
-createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-deletedAt TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP 
+    createdAt 		TIMESTAMP 	      DEFAULT CURRENT_TIMESTAMP ,
+    updatedAt 		TIMESTAMP 	      DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    deletedAt	   	TIMESTAMP         NULL ON UPDATE CURRENT_TIMESTAMP, 
+
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id),
+    FOREIGN KEY (id_producto) REFERENCES productos(id),
 );
 
+
 -- USUARIOS al menos 5 --
-INSERT INTO usuarios (id, email, contrasenia, fecha, dni, fotoPerfil, createdAt, updatedAt, deletedAt)
+INSERT INTO usuarios (id, mail, contrasenia, fecha, dni, fotoPerfil, createdAt, updatedAt, deletedAt)
 VALUES
   (default, 'laliespo@gmail.com', '123456', '2024/10/20', '46442824', 'images/users/1.png', default, default, null),
   (default, 'tinitini@hotmail.com', '123456', '2023/10/20', '45442824', 'images/users/2.png', default, default, null),
@@ -108,3 +119,13 @@ VALUES                  (default, 1,           1,          'Este blush líquido 
                         (default, 10,          3,          '¡El gloss de Rhode es simplemente magnífico! Le da a mis labios un brillo deslumbrante y una sensación suave y cómoda. ¡Me encanta!',                                         default,   default,    null),
                         (default, 10,          4,          '¡Este gloss es todo lo que necesito para destacar mis labios! El gloss de Rhode tiene una textura increíblemente suave y un brillo que no pasa desapercibido.',               default,   default,    null),
                         (default, 10,          5,          '¡No puedo dejar de usar este gloss! El gloss de Rhode es mi favorito absoluto, su fórmula no pegajosa y sus tonos son perfectos para cualquier ocasión.',                     default,   default,    null);
+
+-- Teníamos los productos duplicados así que tuvimos que eliminarlos
+SELECT nombre, COUNT(*)
+FROM productos
+GROUP BY nombre
+HAVING COUNT(*) > 1;
+
+DELETE p1 FROM productos p1
+INNER JOIN productos p2
+WHERE p1.id > p2.id AND p1.nombre = p2.nombre;

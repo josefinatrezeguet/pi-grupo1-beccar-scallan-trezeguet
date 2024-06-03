@@ -79,6 +79,12 @@ li {
   color: #5b4242;
 }
 
+h2 {
+  font-family: var(--base-font-family);
+  font-weight: 300;
+  color: #5b4242;
+}
+
 
 /*====== Main Header ======*/
 .main-header {

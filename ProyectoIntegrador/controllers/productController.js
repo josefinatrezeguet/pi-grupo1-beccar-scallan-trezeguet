@@ -1,4 +1,5 @@
 const db = require('../database/models');
+const op = db.Sequelize.Op;
 
 const productController = {
     index: function(req, res) {
@@ -30,6 +31,15 @@ const productController = {
             .catch(function(error){
                 console.log(error);
             });
+    },
+    store: function(req, res) {
+        let form = req.body;
+        db.Producto.create(form)
+        .then((result) => {
+            return res.redirect("/")
+        }).catch((err) => {
+          return console.log(err);
+        });
     }
 }
 

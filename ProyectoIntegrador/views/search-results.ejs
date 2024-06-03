@@ -18,7 +18,11 @@
 	</div>
 	<div class="container products-wrapper">
 		<div class="row">
-			<% productos.forEach(function(producto, index) { %>
+            <% if (!Array.isArray(productos) && productos != null){
+                productos = [productos];
+            }
+            if (productos && productos.length > 0) {
+                productos.forEach(function(producto, index) { %>
 				<div class="col-12 col-sm-6 col-lg-3">
 					<section class="product-box">
 						<a href="/product/id/<%= producto.id %>">
@@ -33,8 +37,10 @@
 						</a>
 					</section>
 				</div>
-			<% }); %>
-	</div>
+			<% })} else {%>
+				<h2> Disculpas, no encontramos ningún resultado para su búsqueda.</h2>
+			<% }%>
+		</div>
 	</div>
 
 	<!-- footer -->
