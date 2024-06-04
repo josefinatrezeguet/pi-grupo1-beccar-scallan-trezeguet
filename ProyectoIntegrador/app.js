@@ -21,16 +21,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/product', productRouter);
-
 app.use(session({
   secret:'grupoUno',
-  resave:false,
-  saveUninitialized:true,
-}))
-;
+  resave: false,
+  saveUninitialized: true,
+}));
 
 app.use(function(req, res, next) {
   if (req.session.user != undefined) {
@@ -38,6 +33,30 @@ app.use(function(req, res, next) {
   }
   return next()
 });
+
+app.use(function(req, res, next) {
+  if (req.cookies.userId != undefined && req.session.user == undefined) {
+      let id = req.cookies.userId;
+
+      db.User.findByPk(id)
+      .then(function(result) {
+
+        req.session.user = result;
+        res.locals.user = result;
+
+        return next(); 
+      }).catch(function(err) {
+        return console.log(err); ; 
+      });
+
+  } else {
+    return next()
+  }
+});
+
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+app.use('/product', productRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
