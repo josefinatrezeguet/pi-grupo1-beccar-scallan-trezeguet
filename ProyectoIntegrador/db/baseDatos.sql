@@ -6,31 +6,31 @@ CREATE TABLE usuarios (
 
 /*  Columna 	        Tipo de dato 	    Restricciones */
 
-    id 			        INT 		          UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    id 			        INT 		        UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     mail 		        VARCHAR(250) 	    NOT NULL,
-    contrasenia 	  VARCHAR(1000) 	  NOT NULL,
-    fecha 	        DATE 		          NOT NULL,
-    dni 	          INT 		          NOT NULL, UNIQUE,
-    fotoPerfil 	    VARCHAR(250) 	    NOT NULL,
+    contrasenia 	    VARCHAR(1000) 	    NOT NULL,
+    fecha 	            DATE 		        NOT NULL,
+    dni 	            INT 		        NOT NULL, UNIQUE,
+    fotoPerfil 	        VARCHAR(250) 	    NOT NULL,
 
-    createdAt 		  TIMESTAMP 	      DEFAULT CURRENT_TIMESTAMP ,
-    updatedAt 		  TIMESTAMP 	      DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    deletedAt		    TIMESTAMP         NULL ON UPDATE CURRENT_TIMESTAMP, 
+    createdAt 		    TIMESTAMP 	        DEFAULT CURRENT_TIMESTAMP ,
+    updatedAt 		    TIMESTAMP 	        DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    deletedAt		    TIMESTAMP           NULL ON UPDATE CURRENT_TIMESTAMP, 
 );
 
 CREATE TABLE productos (
 
 /*  Columna 	        Tipo de dato 	    Restricciones */
 
-    id 			            INT 		          UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    id_usuario          INT			          UNSIGNED,
+    id 			        INT 		        UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    id_usuario          INT			        UNSIGNED,
     imagen              VARCHAR(250) 	    NOT NULL,
     nombre              VARCHAR(250) 	    NOT NULL,
     descripcion         VARCHAR(350) 	    NOT NULL,
 
-    createdAt 		      TIMESTAMP 	      DEFAULT CURRENT_TIMESTAMP ,
-    updatedAt 	      	TIMESTAMP 	      DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    deleteAt	        	TIMESTAMP         NULL ON UPDATE CURRENT_TIMESTAMP, 
+    createdAt 		    TIMESTAMP 	        DEFAULT CURRENT_TIMESTAMP ,
+    updatedAt 	      	TIMESTAMP 	        DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    deleteAt	      	TIMESTAMP           NULL ON UPDATE CURRENT_TIMESTAMP, 
 
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id),
 );
@@ -41,14 +41,14 @@ CREATE TABLE comentarios (
 
 /*  Columna         Tipo de dato 	    Restricciones */
 
-    id 			      INT 		          UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    id 			    INT 		        UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     id_producto		INT		            UNSIGNED,
     id_usuario		INT		            UNSIGNED,
     texto 		    VARCHAR(500) 	    NOT NULL,
 
-    createdAt 		TIMESTAMP 	      DEFAULT CURRENT_TIMESTAMP ,
-    updatedAt 		TIMESTAMP 	      DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    deletedAt	   	TIMESTAMP         NULL ON UPDATE CURRENT_TIMESTAMP, 
+    createdAt 		TIMESTAMP 	        DEFAULT CURRENT_TIMESTAMP ,
+    updatedAt 		TIMESTAMP 	        DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    deletedAt	   	TIMESTAMP           NULL ON UPDATE CURRENT_TIMESTAMP, 
 
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id),
     FOREIGN KEY (id_producto) REFERENCES productos(id),
