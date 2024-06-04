@@ -10,12 +10,12 @@ CREATE TABLE usuarios (
     mail 		        VARCHAR(250) 	    NOT NULL,
     contrasenia 	    VARCHAR(1000) 	    NOT NULL,
     fecha 	            DATE 		        NOT NULL,
-    dni 	            INT 		        NOT NULL, UNIQUE,
+    dni 	            INT 		        NOT NULL UNIQUE,
     fotoPerfil 	        VARCHAR(250) 	    NOT NULL,
 
     createdAt 		    TIMESTAMP 	        DEFAULT CURRENT_TIMESTAMP ,
     updatedAt 		    TIMESTAMP 	        DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    deletedAt		    TIMESTAMP           NULL ON UPDATE CURRENT_TIMESTAMP, 
+    deletedAt		    TIMESTAMP           NULL ON UPDATE CURRENT_TIMESTAMP
 );
 
 CREATE TABLE productos (
@@ -30,9 +30,9 @@ CREATE TABLE productos (
 
     createdAt 		    TIMESTAMP 	        DEFAULT CURRENT_TIMESTAMP ,
     updatedAt 	      	TIMESTAMP 	        DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    deleteAt	      	TIMESTAMP           NULL ON UPDATE CURRENT_TIMESTAMP, 
+    deleteAt	      	TIMESTAMP           NULL ON UPDATE CURRENT_TIMESTAMP,
 
-    FOREIGN KEY (id_usuario) REFERENCES usuarios(id),
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
 );
 
 ALTER TABLE productos CHANGE COLUMN deleteAt deletedAt TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP; -- tuvimos un error en el nombre de la columna y lo corregimos --
@@ -51,7 +51,7 @@ CREATE TABLE comentarios (
     deletedAt	   	TIMESTAMP           NULL ON UPDATE CURRENT_TIMESTAMP, 
 
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id),
-    FOREIGN KEY (id_producto) REFERENCES productos(id),
+    FOREIGN KEY (id_producto) REFERENCES productos(id)
 );
 
 
