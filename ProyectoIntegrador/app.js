@@ -36,11 +36,11 @@ app.use(function(req, res, next) {
 
 app.use(function(req, res, next) {
   if (req.cookies.userId != undefined && req.session.user == undefined) {
-      let id = req.cookies.userId;
+      let id = req.cookies.userId; 
 
-      db.User.findByPk(id)
+      db.Usuario.findByPk(id)
       .then(function(result) {
-
+        
         req.session.user = result;
         res.locals.user = result;
 
@@ -48,8 +48,8 @@ app.use(function(req, res, next) {
       }).catch(function(err) {
         return console.log(err); ; 
       });
-
-  } else {
+  } 
+  else {
     return next()
   }
 });
