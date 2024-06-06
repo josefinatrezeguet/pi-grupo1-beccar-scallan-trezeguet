@@ -17,7 +17,7 @@
 			</div>
 			<div class="data-container col-6">
 				<div class="d-flex align-items-center ">
-					<h1 class="main-title"><%- usuario.nombre %>
+					<h1 class="main-title"><%- usuario.usuario %>
 						<a href="/users/edit">
 							<i class="fas fa-cog"></i>
 						</a>
@@ -26,12 +26,12 @@
 				</div>
 				<div>
 					<ul>
-						<li class="email"><%- usuario.email %></li>
+						<li class="email"><%- usuario.mail %></li>
 					</ul>
 				</div><br>
 				<div>
 					<ul>
-						<li> 12 productos</li>
+						<li><%= productos.length %> productos</li>
 						<li> 150 seguidores</li>
 						<li> 200 comentarios</li>
 					</ul>

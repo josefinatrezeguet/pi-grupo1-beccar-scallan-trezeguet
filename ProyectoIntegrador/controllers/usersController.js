@@ -23,13 +23,30 @@ const usersController = {
         }
     },
     profile: function(req, res, next) {
-        let productos;
         let usuario;
+        let productos;
+        let id;
+
+        if (req.session.user != undefined) {
+            id = req.session.user.id;
+        }
+        else if (req.cookies.userId != undefined) {
+            id = req.cookies.userId;
+        }
+        else {
+            return res.redirect("/users/login");
+        }
     
-        db.Usuario.findOne()
+        db.Usuario.findByPk(id)
             .then(function(results){
                 usuario = results; 
-                return db.Producto.findAll(); 
+
+                let filtro = {
+                    where: [
+                        {clienteId: id}
+                    ]
+                };
+                return db.Producto.findAll(filtro); 
             })
             .then(function(results){
                 productos = results;
@@ -38,12 +55,23 @@ const usersController = {
             .catch(function(error){
                 console.log(error);
             });
-    }, 
+    },
     usersEdit: function(req, res, next) {
+        let id;
 
-        db.Usuario.findOne()
+        if (req.session.user != undefined) {
+            id = req.session.user.id;
+        }
+        else if (req.cookies.userId != undefined) {
+            id = req.cookies.userId;
+        }
+        else {
+            return res.redirect("/users/login");
+        }
+
+        db.Usuario.findByPk(id)
         .then(function(results){
-            return res.render('profile-edit', {title: 'Editar perfil', usuario: results});
+            return res.render('profile-edit', {title: "Editar perfil", usuario: results});
         })
         .catch(function(error){
             console.log(error);
@@ -65,14 +93,14 @@ const usersController = {
                     if (form.remember != undefined) {
                         res.cookie("userId", result.id, {maxAge: 1000 * 60 * 35})
                     }
-                    return res.redirect("/profile");
+                    return res.redirect("/users/profile");
                 } else {
                     return res.send("Error en la contraseña");
 
                 }
-
-            } else {
-                return res.send("No hay mail similares a : " + form.email);
+            } 
+            else {
+                return res.send("No hay mails similares a : " + form.email);
             }
 
         }).catch((err) => {
@@ -84,10 +112,11 @@ const usersController = {
 
         let usuario = {
             mail: form.email,
+            usuario: form.username,
             contrasenia: bcrypt.hashSync(form.password, 10),
-            fecha: form.birthdate,
-            dni: form.document_number,
-            fotoPerfil: form.profile_picture
+            fechaNacimiento: form.birthdate,
+            numeroDocumento: form.document_number,
+            foto: form.profile_picture
         }
 
         db.Usuario.create(usuario)
@@ -95,7 +124,7 @@ const usersController = {
             return res.redirect("/")
         })
         .catch((err) => {
-        return console.log(err);
+            return console.log(err);
         });
         },
 }

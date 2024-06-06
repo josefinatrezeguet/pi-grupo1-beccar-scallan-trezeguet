@@ -6,7 +6,11 @@
 
 <body>
 	<!-- Header -->
-	<%- include("./partials/header") %>
+	<% if (locals.user != undefined) { %>
+		<%- include("./partials/headerLogueado") %>
+	<% } else { %>
+		<%- include("./partials/header") %>
+	<% } %>
 	<!-- /Header -->
 
 	<!-- product detail -->
@@ -24,7 +28,7 @@
 					<section class="comments">
 						<% comentarios.forEach(function(comentario, index) { %>
 							<article>
-								<img src=> alt="">
+								<img src=><%= comentario.usuario.fotoPerfil%>
 								<div class="data">
 									<p class="user">
 									<strong><a href="/users/profile"><%=comentario.id_usuario%></a></strong>
