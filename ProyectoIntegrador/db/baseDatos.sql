@@ -130,5 +130,10 @@ DELETE p1 FROM productos p1
 INNER JOIN productos p2
 WHERE p1.id > p2.id AND p1.nombre = p2.nombre;
 
+-- Algunas modificaciones que tuvimos que hacer en las columnas
 ALTER TABLE usuarios
 ADD COLUMN usuario VARCHAR(250) NOT NULL;
+
+ALTER TABLE usuarios 
+CHANGE COLUMN email mail VARCHAR(50) NOT NULL;
+

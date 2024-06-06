@@ -9,10 +9,11 @@ const productController = {
             include: [
               {association: "usuario"},
               {association: "comentarios", 
-                include: [{association: 'usuario'} 
+                include: [{association: "usuario"} 
                 ]}
             ]
         }
+
         let comentarios;
         let productos;
         
@@ -24,6 +25,7 @@ const productController = {
             console.log(error);
         });
     },
+
     create: function(req, res) {
 
         if (req.session.user != undefined) {
@@ -44,19 +46,21 @@ const productController = {
                 console.log(error);
             });
     },
+
     store: function(req, res) {
-        let formulario = req.body;
-        db.Producto.create(formulario)
+        let form = req.body;
+        db.Producto.create(form)
         .then((result) => {
             return res.redirect("/product/id/" + result.id)
         }).catch((err) => {
           return console.log(err);
         });
     },
+
     formUpdate: function(req, res) {
-        let formulario = req.body;
+        let form = req.body;
         
-        db.Producto.findByPk(formulario.id)
+        db.Producto.findByPk(form.id)
         .then(function(results){
             return res.render('product-edit', {title:"Editar producto", productos: results, usuario: req.session.user || req.cookies.userId});
         })
@@ -64,34 +68,39 @@ const productController = {
             return console.log(err);
           });
     },
+
     update: function(req, res) {
-        let formulario = req.body;
-        let filtro = {
+        let form = req.body;
+        let filtrado = {
             where: {
-            id: formulario.id
+            id: form.id
             }
         } 
-        db.Producto.update(formulario, filtro)
+
+        db.Producto.update(form, filtrado)
         .then((result) => {
-            return res.redirect("/product/id/" + formulario.id)
+            return res.redirect("/product/id/" + form.id)
         }).catch((err) => {
             return console.log(err);
         });
     },
+
     destroy: function(req, res) {
-        let formulario = req.body;
-        let filtro = {
+        let form = req.body;
+        
+        let filtrado = {
           where: {
-            id: formulario.id
+            id: form.id
           }
         }
-        db.Producto.destroy(filtro)
+  
+        db.Producto.destroy(filtrado)
         .then((result) => {
           return res.redirect("/");
         }).catch((err) => {
           return console.log(err);
         });
-      },    
+      }
 }
 
 module.exports = productController;
