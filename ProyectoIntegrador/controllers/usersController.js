@@ -114,9 +114,9 @@ const usersController = {
             mail: form.email,
             usuario: form.username,
             contrasenia: bcrypt.hashSync(form.password, 10),
-            fechaNacimiento: form.birthdate,
-            numeroDocumento: form.document_number,
-            foto: form.profile_picture
+            fecha: form.birthdate,
+            dni: form.document_number,
+            fotoPerfil: form.profile_picture
         }
 
         db.Usuario.create(usuario)
