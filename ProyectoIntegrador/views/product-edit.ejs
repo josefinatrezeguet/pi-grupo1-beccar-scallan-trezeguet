@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<!-- Include Head -->
+
+<%- include("./partials/head") %>
+
+<body>
+	<!-- Header -->
+	<%- include("./partials/headerLogueado") %>
+
+	<!-- /Header -->
+
+	<!-- Novedades -->
+
+	<div class="container products-wrapper">
+		<div class="row">
+			<div class="col-12">
+				<h2 class="products-title">Editar Producto</h2>
+			</div>
+
+			<form class="formPropio" action="/product/edit" method="POST">
+				<input type="hidden" name="id" value="<%= productos.id %>">
+
+				<label class="form-label" for="nombreProd">Nombre del producto</label><br>
+				<input class="form-input" value="<%= productos.nombreProd %>" type="text" id="nombreProd" name="nombreProd" required><br>
+				
+				<label class="form-label" for="imagenProd">Imagen</label><br>
+				<input class="form-input file-select" value="<%= productos.imagenProd %>" type="text" id="imagen" name="imagenProd" required><br>
+				
+				<label class="form-label" for="descripcion">Descripción</label><br>
+				<textarea class="form-input" id="descripcion" name="descripcion" rows="4" required><%= productos.descripcion %></textarea><br>			 
+				
+				<button type="submit" class="buy-now-button botonRegister">Aceptar Cambios</button>
+			</form>
+		</div>
+	</div>
+
+	<!-- footer -->
+	
+	<%- include("./partials/footer") %>
+
+	<!-- /footer -->
+</body>
+
+</html>
