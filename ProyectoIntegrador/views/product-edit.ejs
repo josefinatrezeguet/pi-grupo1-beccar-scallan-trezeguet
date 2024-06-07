@@ -1,45 +1,40 @@
 <!DOCTYPE html>
 <html lang="es">
 <!-- Include Head -->
-
 <%- include("./partials/head") %>
+<!-- Include Head -->
 
 <body>
 	<!-- Header -->
-	<%- include("./partials/headerLogueado") %>
-
+	<%- include("./partials/header") %>
 	<!-- /Header -->
-
-	<!-- Novedades -->
 
 	<div class="container products-wrapper">
 		<div class="row">
 			<div class="col-12">
-				<h2 class="products-title">Editar Producto</h2>
+				<h2 class="products-title">Registrate</h2>
 			</div>
-
-			<form class="formPropio" action="/product/edit" method="POST">
-				<input type="hidden" name="id" value="<%= productos.id %>">
-
-				<label class="form-label" for="nombreProd">Nombre del producto</label><br>
-				<input class="form-input" value="<%= productos.nombreProd %>" type="text" id="nombreProd" name="nombreProd" required><br>
-				
-				<label class="form-label" for="imagenProd">Imagen</label><br>
-				<input class="form-input file-select" value="<%= productos.imagenProd %>" type="text" id="imagen" name="imagenProd" required><br>
-				
-				<label class="form-label" for="descripcion">Descripción</label><br>
-				<textarea class="form-input" id="descripcion" name="descripcion" rows="4" required><%= productos.descripcion %></textarea><br>			 
-				
-				<button type="submit" class="buy-now-button botonRegister">Aceptar Cambios</button>
-			</form>
+			<form action="/users/register" method="post">
+				<input class="form-input" type="email" name="email" placeholder="Email" required>
+				<input class="form-input" type="text" name="usuario" placeholder="Usuario" required>
+				<input class="form-input" type="password" name="contrasenia" placeholder="Contraseña" required>
+	
+				<label for="fecha_nacimiento" class="label">Fecha de nacimiento</label>
+				<input class="form-input" type="date" name="nacimiento" required>
+	
+				<label for="nro_documento" class="label">Número de documento</label>
+				<input class="form-input" type="number" name="dni" required>
+	
+				<label for="foto_perfil" class="label">Foto de perfil</label>
+				<input class="form-input" type="text" name="fotoPerfil" required>
+	
+				<button class="form-label" type="submit">Registrarse</button>
+			 </form>	
 		</div>
 	</div>
 
 	<!-- footer -->
-	
 	<%- include("./partials/footer") %>
-
 	<!-- /footer -->
 </body>
-
 </html>

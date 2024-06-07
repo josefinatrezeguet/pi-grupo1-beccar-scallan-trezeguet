@@ -1,25 +1,24 @@
 const db = require('../database/models');
-const op = db.Sequelize.Op;
-const bcrypt = require("bcryptjs")
+const bcrypt = require("bcryptjs");
 
 const usersController = {
     login: function(req, res, next) {
         if (req.session.user != undefined) {
             return res.redirect("/");
         } else {
-            return res.render('login', {title:"Login"})
+            return res.render('login', {title:"Login"});
         }
     },
     logout: function(req, res, next) {
-        req.session.destroy()
-        res.clearCookie("userId")
+        req.session.destroy();
+        res.clearCookie("userId");
         return res.redirect("/");
     },
     register: function(req, res, next) {
         if (req.session.user != undefined) {
             return res.redirect("/users/login");
         } else {
-            return res.render('register', {title: "Registrarse"})
+            return res.render('register', {title: "Registrarse"});
         }
     },
     profile: function(req, res, next) {
@@ -91,7 +90,7 @@ const usersController = {
                 if (check) {
                     req.session.user = result;
                     if (form.remember != undefined) {
-                        res.cookie("userId", result.id, {maxAge: 1000 * 60 * 35})
+                        res.cookie("userId", result.id, {maxAge: 1000 * 60 * 35});
                     }
                     return res.redirect("/users/profile");
                 } else {
@@ -107,26 +106,48 @@ const usersController = {
             return console.log(err);
         });
     },
-    store: function(req, res) {
+    store: function (req, res) {
         let form = req.body;
+
+        // Imprimir el formulario recibido para depuración
+        console.log("Formulario recibido:", form);
+
+        // Validaciones de campos
+        if (!form.email || !form.usuario || !form.contrasenia || !form.nacimiento || !form.dni || !form.fotoPerfil) {
+            console.log("Campos faltantes:", {
+                email: form.email,
+                usuario: form.usuario,
+                contrasenia: form.contrasenia,
+                nacimiento: form.nacimiento,
+                dni: form.dni,
+                fotoPerfil: form.fotoPerfil
+            });
+            return res.status(400).send('Todos los campos son requeridos');
+        }
+
+        let hashedPassword = bcrypt.hashSync(form.contrasenia, 10);
 
         let usuario = {
             mail: form.email,
-            usuario: form.username,
-            contrasenia: bcrypt.hashSync(form.password, 10),
-            fecha: form.birthdate,
-            dni: form.document_number,
-            fotoPerfil: form.profile_picture
-        }
+            usuario: form.usuario,
+            contrasenia: hashedPassword,
+            fecha: form.nacimiento,
+            dni: form.dni,
+            fotoPerfil: form.fotoPerfil
+        };
+
+        console.log("Creando usuario con los siguientes datos:", usuario);
 
         db.Usuario.create(usuario)
-        .then((result) => {
-            return res.redirect("/")
-        })
-        .catch((err) => {
-            return console.log(err);
-        });
-        },
-}
+            .then((result) => {
+                console.log("Usuario creado exitosamente:", result);
+                return res.redirect("/");
+            })
+            .catch((err) => {
+                console.log("Error al crear el usuario:", err);
+                return res.status(500).send('Error al crear el usuario');
+            });
+    },
+};
 
 module.exports = usersController;

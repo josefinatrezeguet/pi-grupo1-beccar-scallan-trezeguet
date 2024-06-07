@@ -45,32 +45,6 @@
 		</div>
 		<!-- /Novedades -->
 		
-		<!-- Más comentados -->
-		<div class="container products-wrapper">
-			<div class="row">
-				<div class="col-12">
-					<h2 class="products-title">Más comentados</h2>
-				</div>
-				<!-- Show the "ultimos" productos -->
-				<% productos.forEach(function(producto, index) { %>
-					<div class="col-12 col-sm-6 col-lg-3">
-						<section class="product-box">
-							<a href="/product/id/<%= producto.id %>">
-								<figure class="product-box_image">
-									<img class="fotoIndex" src=<%= producto.imagenProd %>>
-								</figure>
-								<article class="product-box_data">
-									<h2><%= producto.nombreProd %></h2>
-									<p><%= producto.descripcion %></p>
-									<p>Comentarios: 0</p>
-								</article>
-							</a>
-						</section>
-					</div>
-				<% }); %>
-			</div>
-		</div>
-		
 		<!-- footer -->
 		<%- include("./partials/footer") %>
 		<!-- /footer -->
