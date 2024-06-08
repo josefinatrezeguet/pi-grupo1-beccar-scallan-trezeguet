@@ -66,6 +66,36 @@ const usersController = {
     //loginUser va acá
 
     //store va acá
+    store: function(req, res) {
+        const { email, usuario, contrasenia, nacimiento, dni, fotoPerfil } = req.body;
+        const hashedPassword = bcrypt.hashSync(contrasenia, 10);
+
+        db.Usuario.findOne({ where: { dni } })
+            .then(existingUser => {
+                if (existingUser) {
+                    return res.status(400).send('El DNI ya está registrado');
+                }
+                
+                const newUser = {
+                    mail: email,
+                    usuario,
+                    contrasenia: hashedPassword,
+                    fecha: nacimiento,
+                    dni,
+                    fotoPerfil
+                };
+
+                return db.Usuario.create(newUser)
+                    .then(result => {
+                        return res.redirect("/");
+                    });
+            })
+            .catch(err => {
+                console.log(err);
+                return res.status(500).send('Error al crear el usuario');
+            });
+    }
+
 };
 
 module.exports = usersController;
