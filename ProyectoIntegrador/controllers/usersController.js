@@ -65,7 +65,6 @@ const usersController = {
 
     //loginUser va acá
 
-    //store va acá
     store: function(req, res) {
         const { email, usuario, contrasenia, nacimiento, dni, fotoPerfil } = req.body;
         const hashedPassword = bcrypt.hashSync(contrasenia, 10);
