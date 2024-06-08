@@ -1,33 +1,47 @@
 const db = require('../database/models');
-const op = db.Sequelize.Op;
+const { Op } = db.Sequelize;
 
 const indexController = {
-    index: function(req, res) {
+    index: (req, res) => {
         db.Producto.findAll({
-            order: [['createdAt', 'DESC']],
+            order: [['createdAt', 'DESC']], //productos ordenados de forma descendente según su fecha de creación
         })
-        .then(function(results){
-            return res.render('index', {title: "Aura Beauty", productos: results, user: req.session.user, userId: req.cookies.userId, usuario: req.session.user});
+        .then((results) => {
+            res.render('index', {
+                title: "Aura Beauty",
+                productos: results,
+                userId: req.cookies.userId,
+                usuario: req.session.user,
+                user: req.session.user
+            });
         })
-        .catch(function(error){
-            console.log(error);
+        .catch((error) => {
+            console.error(error);
         });
     },
-    search: function(req, res) {
-        let busqueda = req.query.search;
-        let filtro = {
+
+    search: (req, res) => {
+        const busqueda = req.query.search;
+        const filtro = {
             where: {
-                nombre: { [op.like]: "%" + busqueda + "%" }
-            }
-        }
+                nombre: {
+                    [Op.like]: `%${busqueda}%`,
+                },
+            },
+        };
+
         db.Producto.findAll(filtro)
-        .then(function(results){
-            return res.render('search-results', {title: "Resultados de búsqueda", productos: results, usuario: req.session.user});
+        .then((results) => {
+            res.render('search-results', {
+                title: "Resultados de búsqueda",
+                productos: results,
+                usuario: req.session.user,
+            });
         })
-        .catch(function(error){
-            console.log(error);
+        .catch((error) => {
+            console.error(error);
         });
-    }
-}
+    },
+};
 
 module.exports = indexController;
