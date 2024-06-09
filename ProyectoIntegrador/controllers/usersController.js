@@ -63,37 +63,26 @@ const usersController = {
             });
     },
 
-    //loginUser va acá
-
-    store: function(req, res) {
-        const { email, usuario, contrasenia, nacimiento, dni, fotoPerfil } = req.body;
-        const hashedPassword = bcrypt.hashSync(contrasenia, 10);
-
-        db.Usuario.findOne({ where: { dni } })
-            .then(existingUser => {
-                if (existingUser) {
-                    return res.status(400).send('El DNI ya está registrado');
+        loginUser: function(req, res, next) {
+            const { email, contrasenia, remember } = req.body;
+    
+            db.Usuario.findOne({ where: { mail: email } })
+            .then(result => {
+                if (result && bcrypt.compareSync(contrasenia, result.contrasenia)) {
+                    req.session.user = result;
+                    if (remember) {
+                        res.cookie("userId", result.id, { maxAge: 1000 * 60 * 35 });
+                    }
+                    return res.redirect("/users/profile");
+                } else {
+                    return res.send("Error en la contraseña" || "No hay mails similares a : " + email);
                 }
-                
-                const newUser = {
-                    mail: email,
-                    usuario,
-                    contrasenia: hashedPassword,
-                    fecha: nacimiento,
-                    dni,
-                    fotoPerfil
-                };
-
-                return db.Usuario.create(newUser)
-                    .then(result => {
-                        return res.redirect("/");
-                    });
             })
-            .catch(err => {
-                console.log(err);
-                return res.status(500).send('Error al crear el usuario');
+            .catch(error => {
+                console.log(error);
             });
-    }
+    },
+
 
 };
 
