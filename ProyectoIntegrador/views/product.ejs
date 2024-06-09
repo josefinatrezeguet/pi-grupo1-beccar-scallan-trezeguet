@@ -6,18 +6,30 @@
 
 <body>
     <!-- Header -->
-    <% if (locals.user != undefined) { %>
-    <%- include("./partials/headerLogueado") %>
-    <% } else { %>
-    <%- include("./partials/header") %>
-    <% } %>
+	<% if (locals.user != undefined) { %>
+		<%- include("./partials/headerLogueado") %>
+	<% } else { %>
+		<%- include("./partials/header") %>
+	<% } %>
     <!-- /Header -->
 
     <!-- product detail -->
     <div class="container products-wrapper">
+
         <div class="d-flex align-items-center">
             <h2 class="products-title"><%= productos.nombre %></h2>
+            <p class="product-detail-description">
+				<form action="/product/editProduct" method="post">
+					<input type="hidden" name="id" value="<%= productos.id%>">
+					<button class="form-label" type="submit"><a>Editar</a></button>
+				</form>
+				<form action="/product/delete" method="post">
+					<input type="hidden" name="id" value="<%= productos.id%>">
+					<button class="form-label" type="submit"><a>Eliminar</a></button>
+				</form>  
+			</p>
         </div>
+
         <div class="product-detail">
             <div class="row">
                 <article class="col-12 col-lg-8 product-detail-info">

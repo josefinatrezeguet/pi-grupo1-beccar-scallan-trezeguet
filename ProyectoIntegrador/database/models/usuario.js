@@ -47,7 +47,6 @@ module.exports = function (sequelize, dataTypes) {
         underscored: false
     };
 
-    //relaciones van acá
     let Usuario = sequelize.define(alias, cols, config);
 
     Usuario.associate = function (models) {

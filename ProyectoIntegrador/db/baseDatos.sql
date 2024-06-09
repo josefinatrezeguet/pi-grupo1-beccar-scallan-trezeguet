@@ -29,7 +29,6 @@ deleteAt  TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP
 ALTER TABLE productos CHANGE COLUMN deleteAt deletedAt TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP;
 
 create table comentarios(
-
 id int unsigned primary key auto_increment,
 id_producto INT UNSIGNED,
 id_usuario INT UNSIGNED,

@@ -471,7 +471,7 @@ h2 {
 .form-label {
   display: inline-block;
   font-size: 1.6em;
-  margin: 10px 0;
+  margin: 10px 5px;
   font-family: var(--base-font-family);
   color: #806565;
   border: 1px solid #b79b9b;

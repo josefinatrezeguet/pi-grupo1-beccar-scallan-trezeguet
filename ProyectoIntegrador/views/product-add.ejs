@@ -12,17 +12,20 @@
 	<div class="container products-wrapper">
 		<div class="row">
 			<div class="col-12">
-				<h2 class="products-title">Agregar producto</h2>
+				<h2 class="products-title">Agregar productos</h2>
 			</div>
-			<form action="/product/add" method="get">
-				<label for="imagen" class="label">Imagen</label><br>
-				<input class="input-file" type="file" name="ImagenProducto" placeholder="Imagen de producto" required><br>
+			<form action="/product/add" method="post">
+
+				<input type="hidden" name="id_usuario" value="<%= usuario.id %>">
+
+				<label class="label" for="nombre">Nombre del producto</label><br>
+				<input class="form-input" type="text" id="nombre" name="nombre" required><br>
+
+				<label class="label" for="imagen">Imagen</label><br>
+				<input class="form-input file-select" type="text" id="imagen" name="imagen" required><br>
 	
-				<label for="nombre_producto" class="label">Nombre del producto</label>
-				<input class="form-input" type="text" name="NombreProducto" placeholder="Nombre del producto" required>
-	
-				<label for="descripcion" class="label">Descripción</label>
-				<input class="form-input" type="text" name="DescripcionProducto" placeholder="Descripción" required>
+				<label class="label" for="descripcion">Descripción</label><br>
+				<textarea class="form-input" id="descripcion" name="descripcion" required></textarea><br>
 	
 				<button class="form-label" type="submit">Agregar producto</button>			 
 			</form>	
