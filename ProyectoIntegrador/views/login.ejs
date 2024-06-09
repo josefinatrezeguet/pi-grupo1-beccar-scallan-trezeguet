@@ -17,7 +17,7 @@
 
 			<form action="/users/login" method="post"> 
 				<input class="form-input" type="email" id="email" name="email" placeholder="Email" required>
- 				<input class="form-input" type="password" id="contrasenia" name="contrasenia" placeholder="Contraseña" required>
+				<input class="form-input" type="password" name="contrasenia" id="contrasenia" placeholder="Contraseña" required minlength="4">
 
 				<label for="recordarme" class="label">Recordarme</label>	
 				<input class="checkbox" type="checkbox" id="recordarme" name="recordarme"><br>

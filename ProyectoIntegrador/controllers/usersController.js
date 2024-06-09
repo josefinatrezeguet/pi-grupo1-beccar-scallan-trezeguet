@@ -65,54 +65,93 @@ const usersController = {
 
     loginUser: function(req, res, next) {
         const { email, contrasenia, remember } = req.body;
-
+    
         db.Usuario.findOne({ where: { mail: email } })
             .then(result => {
-                if (result && bcrypt.compareSync(contrasenia, result.contrasenia)) {
-                    req.session.user = result;
-                    if (remember) {
-                        res.cookie("userId", result.id, { maxAge: 1000 * 60 * 35 });
+                if (result) {
+                    if (bcrypt.compareSync(contrasenia, result.contrasenia)) {
+                        req.session.user = result;
+                        if (remember) {
+                            res.cookie("userId", result.id, { maxAge: 1000 * 60 * 35 });
+                        }
+                        return res.redirect("/users/profile");
+                    } else {
+                        return res.send("Error: Contraseña incorrecta");
                     }
-                    return res.redirect("/users/profile");
                 } else {
-                    return res.send("Error en la contraseña" || "No hay mails similares a : " + email);
+                    return res.send("Error: No existe un usuario con ese email");
                 }
             })
             .catch(error => {
                 console.log(error);
             });
     },
-
+    
     store: function(req, res) {
         const { email, usuario, contrasenia, nacimiento, dni, fotoPerfil } = req.body;
         const hashedPassword = bcrypt.hashSync(contrasenia, 10);
-
-        db.Usuario.findOne({ where: { dni } })
-            .then(existingUser => {
-                if (existingUser) {
-                    return res.status(400).send('El DNI ya está registrado');
-                }
-                
-                const newUser = {
-                    mail: email,
-                    usuario,
-                    contrasenia: hashedPassword,
-                    fecha: nacimiento,
-                    dni,
-                    fotoPerfil
-                };
-
-                return db.Usuario.create(newUser)
-                    .then(result => {
-                        return res.redirect("/");
-                    });
+    
+        let newUser;
+        if (dni && dni.trim() !== '') {
+            newUser = {
+                mail: email,
+                usuario,
+                contrasenia: hashedPassword,
+                fecha: nacimiento,
+                dni,
+                fotoPerfil
+            };
+        } else {
+            newUser = {
+                mail: email,
+                usuario,
+                contrasenia: hashedPassword,
+                fecha: nacimiento,
+                fotoPerfil
+            };
+        }
+        db.Usuario.create(newUser)
+            .then(result => {
+                req.session.user = result;
+                res.redirect("/users/profile");
             })
             .catch(err => {
                 console.log(err);
                 return res.status(500).send('Error al crear el usuario');
             });
-    }
-
+    },
+    
+    updateProfile: function(req, res, next) {
+        const { email, usuario, contrasenia, fecha, dni, fotoPerfil } = req.body;
+        const id = req.session.user ? req.session.user.id : req.cookies.userId;
+    
+        db.Usuario.findByPk(id)
+            .then(user => {
+                if (!user) {
+                    return res.status(404).send('Usuario no encontrado');
+                }
+                
+                user.mail = email;
+                user.usuario = usuario;
+                user.fecha = fecha;
+                user.dni = dni;
+                user.fotoPerfil = fotoPerfil;
+    
+                if (contrasenia) {
+                    user.contrasenia = bcrypt.hashSync(contrasenia, 10);
+                }
+    
+                return user.save();
+            })
+            .then(updatedUser => {
+                req.session.user = updatedUser;
+                res.redirect("/users/profile");
+            })
+            .catch(error => {
+                console.log(error);
+                res.status(500).send('Error al actualizar el perfil');
+            });
+    }    
 };
 
 module.exports = usersController;

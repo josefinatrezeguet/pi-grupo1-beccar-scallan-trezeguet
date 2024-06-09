@@ -21,5 +21,6 @@ router.post('/register', usersController.store);
 router.get('/profile', logueado, usersController.profile);
 router.get('/edit', logueado, usersController.usersEdit);
 router.post('/logout', usersController.logout);
+router.post('/edit', logueado, usersController.updateProfile);
 
 module.exports = router;

@@ -11,6 +11,7 @@ const indexController = {
                 title: "Aura Beauty",
                 productos: productos,
                 user: req.session.user,
+                usuario: req.session.user,
                 userId: req.session.user ? req.session.user.id : null
             });
         })

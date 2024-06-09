@@ -1,43 +1,44 @@
-module.exports = function (sequelize, dataTypes) {
+module.exports = function (sequelize, DataTypes) {
     let alias = "Usuario";
     let cols = {
         id: {
             autoIncrement: true,
             primaryKey: true,
-            type: dataTypes.INTEGER
+            type: DataTypes.INTEGER
         },
         mail: {
-            type: dataTypes.STRING,
+            type: DataTypes.STRING,
             allowNull: false
         },
         usuario: {
-            type: dataTypes.STRING,
+            type: DataTypes.STRING,
             allowNull: false
         },
         contrasenia: {
-            type: dataTypes.STRING,
+            type: DataTypes.STRING,
             allowNull: false
         },
         fecha: {
-            type: dataTypes.DATE,
-            allowNull: false
+            type: DataTypes.DATE,
+            allowNull: true 
         },
         dni: {
-            type: dataTypes.INTEGER,
-            allowNull: false,
+            type: DataTypes.INTEGER,
+            allowNull: true, 
             unique: true
         },
         fotoPerfil: {
-            type: dataTypes.STRING
+            type: DataTypes.STRING,
+            allowNull: true 
         },
         createdAt: {
-            type: dataTypes.DATE,
+            type: DataTypes.DATE,
         },
         updatedAt: {
-            type: dataTypes.DATE,
+            type: DataTypes.DATE,
         },
         deletedAt: {
-            type: dataTypes.DATE
+            type: DataTypes.DATE
         }
     };
 
