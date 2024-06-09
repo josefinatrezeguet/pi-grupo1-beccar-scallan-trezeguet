@@ -2,32 +2,32 @@ module.exports = function (sequelize, dataTypes ) {
     let alias = "Producto";
     let cols = {
         id: {
-            autoIncrement : true,
-            primaryKey : true,
-            type : dataTypes.INTEGER
+            autoIncrement: true,
+            primaryKey: true,
+            type: dataTypes.INTEGER
         },
         id_usuario: {
-            type : dataTypes.INTEGER
+            type: dataTypes.INTEGER
         },
         imagen: {
-            type : dataTypes.STRING
+            type: dataTypes.STRING
         },
         nombre: {
-            type : dataTypes.STRING
+            type: dataTypes.STRING
         },
         descripcion: {
-            type : dataTypes.STRING
+            type: dataTypes.STRING 
         },
         createdAt: {
-            type : dataTypes.DATE
+            type: dataTypes.DATE
         },
         updatedAt: {
-            type : dataTypes.DATE
+            type: dataTypes.DATE
         },
         deletedAt: {
-            type : dataTypes.DATE
+            type: dataTypes.DATE
         }
-  	}
+    }
 
     let config = {
         tableName: "productos",
@@ -48,6 +48,6 @@ module.exports = function (sequelize, dataTypes ) {
             foreignKey: 'id_producto'
         });
     }
-
+    
     return Producto;
 }

@@ -70,11 +70,14 @@ const productController = {
 
     destroy: (req, res) => {
         const { id } = req.body;
-
-        db.Producto.destroy({ where: { id } })
+    
+        db.Comentario.destroy({ where: { id_producto: id } })
+            .then(() => {
+                return db.Producto.destroy({ where: { id } });
+            })
             .then(() => res.redirect("/"))
             .catch(err => console.error(err));
     }
-};
+    };
 
 module.exports = productController;

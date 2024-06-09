@@ -2,25 +2,25 @@ const db = require('../database/models');
 const { Op } = db.Sequelize;
 
 const indexController = {
-    index: (req, res) => {
+    index: (req, res, next) => {
         db.Producto.findAll({
-            order: [['createdAt', 'DESC']], //productos ordenados de forma descendente según su fecha de creación
+            order: [['createdAt', 'DESC']],
         })
-        .then((results) => {
+        .then((productos) => {
             res.render('index', {
                 title: "Aura Beauty",
-                productos: results,
-                userId: req.cookies.userId,
-                usuario: req.session.user,
-                user: req.session.user
+                productos: productos,
+                user: req.session.user,
+                userId: req.session.user ? req.session.user.id : null
             });
         })
         .catch((error) => {
             console.error(error);
+            next(error);
         });
     },
 
-    search: (req, res) => {
+    search: (req, res, next) => {
         const busqueda = req.query.search;
         const filtro = {
             where: {
@@ -31,15 +31,16 @@ const indexController = {
         };
 
         db.Producto.findAll(filtro)
-        .then((results) => {
+        .then((resultados) => {
             res.render('search-results', {
                 title: "Resultados de búsqueda",
-                productos: results,
+                productos: resultados,
                 usuario: req.session.user,
             });
         })
         .catch((error) => {
             console.error(error);
+            next(error);
         });
     },
 };
