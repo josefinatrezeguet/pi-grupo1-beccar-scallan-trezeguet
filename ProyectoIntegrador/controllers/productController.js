@@ -23,7 +23,6 @@ const productController = {
             .catch(error => console.error(error));
     },
 
-
     create: (req, res) => {
         const userId = req.session.user?.id || req.cookies.userId;
 
@@ -39,7 +38,7 @@ const productController = {
             });
         })
         .catch(error => console.error(error));
-},
+    },
 
     store: (req, res) => {
         db.Producto.create(req.body)
@@ -61,7 +60,6 @@ const productController = {
             .catch(err => console.error(err));
     },
 
-
     update: (req, res) => {
         const { id, ...form } = req.body;
 
@@ -80,6 +78,6 @@ const productController = {
             .then(() => res.redirect("/"))
             .catch(err => console.error(err));
     }
-    };
+};
 
 module.exports = productController;

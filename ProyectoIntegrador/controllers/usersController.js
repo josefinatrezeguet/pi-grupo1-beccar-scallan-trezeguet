@@ -47,24 +47,22 @@ const usersController = {
             });
     },
 
-//acá va usersEdit (rochi)
-usersEdit:function(req,res,next){
-    let id = req.session.user ? req.session.user.id : req.cookies.userld;
+    usersEdit: function(req,res,next) {
+        let id = req.session.user ? req.session.user.id : req.cookies.userld;
 
-    if (!id){
-        return res.redirect("/users/login");
-    }
-    db.Usuario.findByPk(id)
-        .then(results => {
-            return res.render('profile-edit',{title:"Editar perfil", usuario:results});
-        })
-        .catch(error => {
-            console.log(error);
-        });
-},
+        if (!id){
+            return res.redirect("/users/login");
+        }
+        db.Usuario.findByPk(id)
+            .then(results => {
+                return res.render('profile-edit',{title:"Editar perfil", usuario:results});
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    },
 
-
-loginUser: function(req, res, next) {
+    loginUser: function(req, res, next) {
         const { email, contrasenia, remember } = req.body;
     
         db.Usuario.findOne({ where: { mail: email } })
@@ -122,39 +120,37 @@ loginUser: function(req, res, next) {
             });
     },
 
-updateProfile: function(req, res, next) {
-    const { email, usuario, contrasenia, fecha, dni, fotoPerfil } = req.body;
-    const id = req.session.user ? req.session.user.id : req.cookies.userId;
+    updateProfile: function(req, res, next) {
+        const { email, usuario, contrasenia, fecha, dni, fotoPerfil } = req.body;
+        const id = req.session.user ? req.session.user.id : req.cookies.userId;
 
-    db.Usuario.findByPk(id)
-        .then(user => {
-            if (!user) {
-                return res.status(404).send('Usuario no encontrado');
-            }
-            
-            user.mail = email;
-            user.usuario = usuario;
-            user.fecha = fecha;
-            user.dni = dni;
-            user.fotoPerfil = fotoPerfil;
+        db.Usuario.findByPk(id)
+            .then(user => {
+                if (!user) {
+                    return res.status(404).send('Usuario no encontrado');
+                }
+                
+                user.mail = email;
+                user.usuario = usuario;
+                user.fecha = fecha;
+                user.dni = dni;
+                user.fotoPerfil = fotoPerfil;
 
-            if (contrasenia) {
-                user.contrasenia = bcrypt.hashSync(contrasenia, 10);
-            }
+                if (contrasenia) {
+                    user.contrasenia = bcrypt.hashSync(contrasenia, 10);
+                }
 
-            return user.save();
-        })
-        .then(updatedUser => {
-            req.session.user = updatedUser;
-            res.redirect("/users/profile");
-        })
-        .catch(error => {
-            console.log(error);
-            res.status(500).send('Error al actualizar el perfil');
-        });
-}   
-
-
+                return user.save();
+            })
+            .then(updatedUser => {
+                req.session.user = updatedUser;
+                res.redirect("/users/profile");
+            })
+            .catch(error => {
+                console.log(error);
+                res.status(500).send('Error al actualizar el perfil');
+            });
+    }   
 };
 
 module.exports = usersController;
