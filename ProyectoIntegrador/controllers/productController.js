@@ -23,7 +23,23 @@ const productController = {
             .catch(error => console.error(error));
     },
 
-//acá va create (jose)
+
+    create: (req, res) => {
+        const userId = req.session.user?.id || req.cookies.userId;
+
+        if (!userId) {
+            return res.redirect("/users/login");
+        }
+
+        db.Usuario.findByPk(userId)
+         .then(results => {
+            res.render('product-add', {
+                title: "Añadir producto",
+                usuario: results
+            });
+        })
+        .catch(error => console.error(error));
+},
 
     store: (req, res) => {
         db.Producto.create(req.body)
@@ -45,7 +61,14 @@ const productController = {
             .catch(err => console.error(err));
     },
 
-//acá va update (jose)
+
+    update: (req, res) => {
+        const { id, ...form } = req.body;
+
+        db.Producto.update(form, { where: { id } })
+            .then(() => res.redirect(`/product/id/${id}`))
+            .catch(err => console.error(err));
+    },
 
     destroy: (req, res) => {
         const { id } = req.body;
