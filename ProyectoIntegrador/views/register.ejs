@@ -5,8 +5,12 @@
 <!-- Include Head -->
 
 <body>
-    <!-- Header -->
-    <%- include("./partials/header") %>
+  	<!-- Header -->
+      <% if (locals.user != undefined) { %>
+        <%- include("./partials/headerLogueado") %>
+    <% } else { %>
+        <%- include("./partials/header") %>
+    <% } %>
     <!-- /Header -->
 
     <div class="container products-wrapper">
