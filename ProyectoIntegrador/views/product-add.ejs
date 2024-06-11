@@ -20,16 +20,25 @@
 			</div>
 			<form action="/product/add" method="post">
 
-				<input type="hidden" name="id_usuario" value="<%= usuario.id %>">
+				<input type="hidden" name="id_usuario" value="<%= locals.user.id %>">
 
 				<label class="label" for="nombre">Nombre del producto</label><br>
 				<input class="form-input" type="text" id="nombre" name="nombre" required><br>
+				<% if (locals.errors && errors.nombre) { %>
+					<p class="feedback"><%= errors.nombre.msg %></p>
+				<% } %>
 
 				<label class="label" for="imagen">Imagen</label><br>
 				<input class="form-input file-select" type="text" id="imagen" name="imagen" required><br>
+				<% if (locals.errors && errors.imagen) { %>
+					<p class="feedback"><%= errors.imagen.msg %></p>
+				<% } %>
 	
 				<label class="label" for="descripcion">Descripción</label><br>
 				<textarea class="form-input" id="descripcion" name="descripcion" required></textarea><br>
+				<% if (locals.errors && errors.descripcion) { %>
+					<p class="feedback"><%= errors.descripcion.msg %></p>
+				<% } %>
 	
 				<button class="form-label" type="submit">Agregar producto</button>			 
 			</form>	

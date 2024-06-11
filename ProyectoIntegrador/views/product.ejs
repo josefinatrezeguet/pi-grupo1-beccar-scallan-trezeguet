@@ -6,30 +6,34 @@
 
 <body>
     <!-- Header -->
-	<% if (locals.user != undefined) { %>
-		<%- include("./partials/headerLogueado") %>
-	<% } else { %>
-		<%- include("./partials/header") %>
-	<% } %>
+    <% if (locals.user != undefined) { %>
+        <%- include("./partials/headerLogueado") %>
+    <% } else { %>
+        <%- include("./partials/header") %>
+    <% } %>
     <!-- /Header -->
 
     <!-- product detail -->
     <div class="container products-wrapper">
-
         <div class="d-flex align-items-center">
             <h2 class="products-title"><%= productos.nombre %></h2>
             <p class="product-detail-description">
-				<form action="/product/editProduct" method="post">
-					<input type="hidden" name="id" value="<%= productos.id%>">
-					<button class="form-label" type="submit"><a>Editar</a></button>
-				</form>
-				<form action="/product/delete" method="post">
-					<input type="hidden" name="id" value="<%= productos.id%>">
-					<button class="form-label" type="submit"><a>Eliminar</a></button>
-				</form>  
-			</p>
+            <% if (condition) { %>
+                <form action="/product/editProduct" method="post">
+                    <input type="hidden" name="id" value="<%= productos.id %>">
+                    <button class="form-label" type="submit"><a>Editar</a></button>
+                </form>
+                <form action="/product/delete" method="post">
+                    <input type="hidden" name="id" value="<%= productos.id %>">
+                    <input type="hidden" name="idUsuario" value="<%= productos.usuario.id %>">
+                    <button class="form-label" type="submit"><a>Eliminar</a></button>
+                </form>
+            </p>
+            <% } %>
         </div>
-
+        <% if (!condition) { %>
+            <p class="label">Producto cargado por <a class="label" href="/users/profile/id/<%= productos.usuario.id %>"><i class="fas fa-user"></i> <%= productos.usuario.usuario %></a></p>
+            <% } %>
         <div class="product-detail">
             <div class="row">
                 <article class="col-12 col-lg-8 product-detail-info">
@@ -38,23 +42,28 @@
                 </article>
                 <div class="col-12 col-lg-4">
                     <section class="comments">
-                        <% comentarios.forEach(function(comentario, index) { %>
-                        <article>
-                            <img src="<%= comentario.usuario.fotoPerfil %>">
+                        <% for(let i = 0; i < comentarios.length; i++) { %>
+                            <article>
+                            <img src="<%= comentarios[i].usuario.fotoPerfil %>" />
                             <div class="data">
                                 <p class="user">
-                                    <strong><a href="/users/profile"><%= comentario.id_usuario %></a></strong>
-                                    <%= comentario.texto %>
+                                    <strong> <a href="/users/profile/id/<%= comentarios[i].usuario.id %>"><%= comentarios[i].usuario.usuario %></a> </strong>
+                                    <%= comentarios[i].texto %>
                                 </p>
                             </div>
                         </article>
-                        <% }); %>
-
+                        <% } %>
                     </section>
+                    <% if (locals.user != undefined) { %>
                     <form class="form" action="/product/id/<%= productos.id %>" method="get">
                         <input class="form-input" type="text" value="" placeholder="Agregar comentario">
                         <button type="submit" class="buy-now-button botonComentario">AGREGAR COMENTARIO</button>
                     </form>
+                    <% } else { %>
+                        <div class="products-title">
+                            <a href="/users/login">Clickea acá para iniciar sesión y agregar un comentario.</a>
+                        </div>
+                    <% } %>
                     <hr>
                 </div>
             </div>
@@ -67,5 +76,4 @@
     <!-- /footer -->
 
 </body>
-
 </html>

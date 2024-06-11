@@ -6,7 +6,7 @@
 
 <body>
   	<!-- Header -->
-      <% if (locals.user != undefined) { %>
+    <% if (locals.user != undefined) { %>
         <%- include("./partials/headerLogueado") %>
     <% } else { %>
         <%- include("./partials/header") %>
@@ -20,17 +20,35 @@
             </div>
             <form action="/users/register" method="post">
                 <input class="form-input" type="email" name="email" placeholder="Email" required>
+                <% if (locals.errors && errors.email) { %>
+                    <p class="feedback"><%= errors.email.msg %></p>
+                <% } %>
                 <input class="form-input" type="text" name="usuario" placeholder="Usuario" required>
+                <% if (locals.errors && errors.usuario) { %>
+                    <p class="feedback"><%= errors.usuario.msg %></p>
+                <% } %>
                 <input class="form-input" type="password" name="contrasenia" id="contrasenia" placeholder="Contraseña" required minlength="4">
+                <% if (locals.errors && errors.contrasenia) { %>
+                    <p class="feedback"><%= errors.contrasenia.msg %></p>
+                <% } %>
     
                 <label for="fecha" class="label">Fecha de nacimiento</label>
                 <input class="form-input" type="date" name="fecha">
+                <% if (locals.errors && errors.fecha) { %>
+                    <p class="feedback"><%= errors.fecha.msg %></p>
+                <% } %>
     
                 <label for="dni" class="label">Número de documento</label>
                 <input class="form-input" type="number" name="dni">
+                <% if (locals.errors && errors.dni) { %>
+                    <p class="feedback"><%= errors.dni.msg %></p>
+                <% } %>
     
                 <label for="fotoPerfil" class="label">Foto de perfil</label>
                 <input class="form-input" type="text" name="fotoPerfil">
+                <% if (locals.errors && errors.fotoPerfil) { %>
+                    <p class="feedback"><%= errors.fotoPerfil.msg %></p>
+                <% } %>
     
                 <button class="form-label" type="submit">Registrarse</button>
             </form>    

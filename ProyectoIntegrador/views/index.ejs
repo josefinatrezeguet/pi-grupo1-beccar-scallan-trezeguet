@@ -25,22 +25,23 @@
 				<div class="col-12">
 					<h2 class="products-title">NUEVOS PRODUCTOS</h2>
 				</div>
-				<% productos.forEach(function(producto, index) { %>
+				<% for(let i = 0; i < productos.length; i++) { %>
 					<div class="col-12 col-sm-6 col-lg-3">
 						<section class="product-box">
-							<a href="/product/id/<%= producto.id %>">
+							<a href="/product/id/<%= productos[i].id %>">
 								<figure class="product-box_image">
-									<img src=<%= producto.imagen %>>
+									<img src=<%= productos[i].imagen %>>
 								</figure>
 								<article class="product-box_data">
-									<h2><%= producto.nombre %></h2>
-									<p><%= producto.descripcion %></p>
-									<p>Comentarios:</p>
+									<h2><%= productos[i].nombre %></h2>
+									<p><%= productos[i].descripcion %></p>
+									<p>Comentarios: <%= productos[i].comentarios.length %></p>
+									<p>Subido por: <a href="/users/profile/id/<%= productos[i].usuario.id %>"><%= productos[i].usuario.usuario %></a></p>
 								</article>
 							</a>
 						</section>
 					</div>
-				<% }); %>
+				<% }; %>
 			</div>
 		</div>
 		<!-- /Novedades -->

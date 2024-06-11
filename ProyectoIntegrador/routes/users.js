@@ -1,26 +1,79 @@
 var express = require('express');
 var router = express.Router();
 const usersController = require("../controllers/usersController");
+const { body } = require('express-validator');
+const db = require('../database/models');
+const bcrypt = require("bcryptjs");
 
-// Middleware para verificar si el usuario está logueado
-const logueado = (req, res, next) => {
-    if (req.session.user || req.cookies.userId) {
-        next(); 
-    } else {
-        res.redirect('/users/login'); 
-    }
-};
+let validationsLogin = [
+    body('email')
+        .notEmpty().withMessage('El campo "email" es obligatorio.').bail()
+        .isEmail().withMessage('Debe ser un email valido').bail()
+        .custom(function(value, {req}){
+            return db.Usuario.findOne({where: { mail: req.body.email },})
+                  .then(function(user){
+                        if(user != undefined){ 
+                            return true;
+                        }
+                        else {
+                            throw new Error ('El email no existe')
+                        }
+                  })
+       }),
 
-// Rutas públicas
+    body('contrasenia')
+        .notEmpty().withMessage('El campo "contraseña" es obligatorio.').bail()
+        .custom(function(value, {req}){
+
+            return db.Usuario.findOne({where: { mail: req.body.email },})
+                  .then(function(result){
+                        if(result != undefined){ 
+                            let check = bcrypt.compareSync(req.body.contrasenia, result.contrasenia);
+                            if(!check) {
+                                throw new Error ('La contraseña es incorrecta')
+                            }
+                        }
+                        else {
+                            throw new Error ('No existe el mail, debe registrarse')
+                        }
+                  })
+
+        })
+]
+
+let validationsRegister = [
+    body('email')
+    .notEmpty().withMessage('El campo "email" es obligatorio.').bail()
+    .isEmail().withMessage('Debe ser un email valido'),
+    
+    body('usuario')
+    .notEmpty().withMessage('Por favor, introduzca un nombre de usuario'),
+    
+    body('contrasenia')
+    .notEmpty().withMessage('El campo "contraseña" es obligatorio.').bail()
+    .isLength({ min: 4 }).withMessage('La contraseña debe tener más de 4 caracteres')
+]
+
+let validationsEdit = [
+    body('mail')
+    .notEmpty().withMessage('El campo "email" es obligatorio.').bail()
+    .isEmail().withMessage('Debe ser un email valido'),
+    
+    body('usuario')
+    .notEmpty().withMessage('Por favor, introduzca un nombre de usuario'),
+    
+    body('contrasenia')
+    .notEmpty().withMessage('El campo "contraseña" es obligatorio.').bail() 
+    .isLength({ min: 4 }).withMessage('La contraseña debe tener más de 4 caracteres')
+]
+
 router.get('/login', usersController.login);
-router.post('/login', usersController.loginUser);
+router.post('/login', validationsLogin, usersController.loginUser);
 router.get('/register', usersController.register);
-router.post('/register', usersController.store);
-
-// Rutas protegidas por la verificación de sesión
-router.get('/profile', logueado, usersController.profile);
-router.get('/edit', logueado, usersController.usersEdit);
+router.post('/register', validationsRegister, usersController.store);
+router.get('/profile/id/:id', usersController.profile);
+router.get('/edit', usersController.usersEdit);
+router.post('/edit', validationsEdit, usersController.updateProfile); 
 router.post('/logout', usersController.logout);
-router.post('/edit', logueado, usersController.updateProfile);
 
 module.exports = router;
