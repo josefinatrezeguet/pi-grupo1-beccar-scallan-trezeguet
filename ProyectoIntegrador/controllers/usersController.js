@@ -5,16 +5,17 @@ const { validationResult } = require('express-validator');
 const usersController = {
 
     login: function(req, res, next) {
-        if (req.session.user) {
-            return res.redirect("/");
-        } else {
-            return res.render('login', { title: "Login" });
+        if (req.session.user != undefined) {
+            return res.redirect("/users/profile/id/" + result.id);
+        } 
+        else {
+            return res.render('login', {title:"Login"})
         }
     },
 
     logout: function(req, res, next) {
-        req.session.destroy();
-        res.clearCookie("userId");
+        req.session.destroy()
+        res.clearCookie("userId")
         return res.redirect("/");
     },
 
@@ -35,47 +36,48 @@ const usersController = {
     },
     
     profile: function(req, res, next) {
-        let usuario;
-        let productos;
-        let comentarios = 0;
-        let id = req.session.user ? req.session.user.id : req.cookies.userId;
+        let id = req.params.id;
 
-        if (!id) {
-            return res.redirect("/users/login");
+        let criterio = {
+            include: [
+                {association: "productos"},
+                {association: "comentarios"}
+            ],
+            order: [[{model: db.Producto, as: 'productos'}, 'createdAt', 'DESC']]
         }
+    
+        db.Usuario.findByPk(id, criterio)
+            .then(function(results){
 
-        db.Usuario.findByPk(id)
-            .then(results => {
-                usuario = results;
-                return db.Producto.findAll({ where: { id_usuario: id } });
+                let condition = false;
+
+                if (req.session.user != undefined && req.session.user.id == results.id) {
+                    condition = true;
+                }
+
+                return res.render('profile', {title: `@${results.usuario}`, usuario: results, productos: results.productos, comentarios: results.comentarios.length, condition: condition});
             })
-            .then(results => {
-                productos = results;
-                return db.Comentario.count({ where: { id_usuario: id } });
-            })
-            .then(results => {
-                comentarios = results;
-                const condition = req.session.user && req.session.user.id === usuario.id;
-                return res.render('profile', { title: "Perfil", usuario, productos, comentarios, condition });
-            })
-            .catch(error => {
+            .catch(function(error){
                 console.log(error);
             });
     },
 
     usersEdit: function(req,res,next) {
-        let id = req.session.user ? req.session.user.id : req.cookies.userId;
+        if (req.session.user != undefined) {
+            let id = req.session.user.id;
 
-        if (!id){
+            db.Usuario.findByPk(id)
+            .then(function(results){
+                return res.render('profile-edit', {title: 'Editar perfil', usuario: results});
+            })
+            .catch(function(error){
+                console.log(error);
+            });    
+        }
+        else {
             return res.redirect("/users/login");
         }
-        db.Usuario.findByPk(id)
-            .then(results => {
-                return res.render('profile-edit',{title:"Editar perfil", usuario:results});
-            })
-            .catch(error => {
-                console.log(error);
-            });
+
     },
 
     loginUser: function(req, res, next) {
