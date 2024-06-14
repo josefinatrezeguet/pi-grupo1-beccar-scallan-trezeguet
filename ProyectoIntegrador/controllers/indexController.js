@@ -12,18 +12,11 @@ const indexController = {
         };
 
         db.Producto.findAll(filtrado)
-        .then((productos) => {
-            res.render('index', {
-                title: "Aura Beauty",
-                productos: productos,
-                user: req.session.user,
-                usuario: req.session.user,
-                userId: req.session.user ? req.session.user.id : null
-            });
+        .then(function(results){
+            return res.render('index', {title: "Aura Beauty", productos: results});
         })
-        .catch((error) => {
-            console.error(error);
-            next(error);
+        .catch(function(error){
+            console.log(error);
         });
     },
 

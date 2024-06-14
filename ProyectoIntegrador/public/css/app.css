@@ -219,6 +219,7 @@ h2 {
 
 .product-box a {
   display: block;
+  color:#b79b9b;
 }
 
 .product-box_image {
@@ -477,6 +478,18 @@ h2 {
   border: 1px solid #b79b9b;
   border-radius: 5px;
   background-color:#D4C1C1;
+}
+
+.usuario-label {
+  display: inline-block;
+  font-size: 1em;
+  margin: 10px 5px;
+  font-family: var(--base-font-family);
+  color: #806565;
+  border: 1px solid #b79b9b;
+  border-radius: 5px;
+  background-color:#D4C1C1;
+  padding: 8px 8px;
 }
 
 .label {

@@ -32,7 +32,7 @@
             <% } %>
         </div>
         <% if (!condition) { %>
-            <p class="label">Producto cargado por <a class="label" href="/users/profile/id/<%= productos.usuario.id %>"><i class="fas fa-user"></i> <%= productos.usuario.usuario %></a></p>
+            <p class="label">Producto cargado por <a class="usuario-label" href="/users/profile/id/<%= productos.usuario.id %>"><%= productos.usuario.mail %></a></p>
             <% } %>
         <div class="product-detail">
             <div class="row">

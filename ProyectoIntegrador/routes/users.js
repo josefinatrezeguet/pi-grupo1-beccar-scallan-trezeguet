@@ -8,7 +8,7 @@ const bcrypt = require("bcryptjs");
 let validationsLogin = [
     body('email')
         .notEmpty().withMessage('El campo "email" es obligatorio.').bail()
-        .isEmail().withMessage('Debe ser un email valido').bail()
+        .isEmail().withMessage('Debe ser un email válido').bail()
         .custom(function(value, {req}){
             return db.Usuario.findOne({where: { mail: req.body.email },})
                   .then(function(user){
@@ -44,7 +44,18 @@ let validationsLogin = [
 let validationsRegister = [
     body('email')
     .notEmpty().withMessage('El campo "email" es obligatorio.').bail()
-    .isEmail().withMessage('Debe ser un email valido'),
+    .isEmail().withMessage('Debe ser un email valido')
+    .custom(function(value){
+        return db.Usuario.findOne({where: { mail: value }})
+              .then(function(user){
+                    if(user == undefined){ 
+                        return true;
+                    }
+                    else{
+                        throw new Error ('El email ya existe')
+                    }
+              })
+    }),
     
     body('usuario')
     .notEmpty().withMessage('Por favor, introduzca un nombre de usuario'),
@@ -73,7 +84,7 @@ router.get('/register', usersController.register);
 router.post('/register', validationsRegister, usersController.store);
 router.get('/profile/id/:id', usersController.profile);
 router.get('/edit', usersController.usersEdit);
-router.post('/edit', validationsEdit, usersController.updateProfile); 
+router.post('/edit', validationsEdit, usersController.update); 
 router.post('/logout', usersController.logout);
 
 module.exports = router;

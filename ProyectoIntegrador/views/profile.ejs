@@ -21,7 +21,7 @@
             </div>
             <div class="data-container col-6">
                 <div class="d-flex align-items-center ">
-                    <h1 class="main-title"><%- usuario.usuario %>
+                    <h1 class="main-title"><%- usuario.mail %>
                         <% if (condition) { %>
                             <a href="/users/edit">
                                 <i class="fas fa-cog"></i>
@@ -53,7 +53,7 @@
 <div class="container products-wrapper">
     <div class="row">
         <div class="col-12">
-            <h2 class="products-title">Mis productos</h2>
+            <h2 class="products-title">Productos publicados</h2>
         </div>
         <% for(let i = 0; i < productos.length; i++) { %>
             <div class="col-12 col-sm-6 col-lg-3">
@@ -71,7 +71,7 @@
                                 <p>No hay comentarios</p>
                             <% } %>
 							<% if (productos[i].usuario) { %>
-								<p>Subido por: <a href="/users/profile/id/<%= productos[i].usuario.id %>"><%= productos[i].usuario.usuario %></a></p>
+								<p>Subido por: <a href="/users/profile/id/<%= productos[i].usuario.id %>"><%= productos[i].usuario.mail %></a></p>
 							<% } else { %>
 								<p>Subido por: Usuario no disponible</p>
 							<% } %>
