@@ -27,7 +27,7 @@ app.use(session({
   saveUninitialized: true,
 }));
 
-// Middleware para cargar el usuario en las vistas
+// Cargar el usuario en las vistas
 app.use(function(req, res, next) {
   if (req.session.user !== undefined) {
     res.locals.user = req.session.user;
@@ -35,7 +35,7 @@ app.use(function(req, res, next) {
   return next();
 });
 
-// Middleware para cargar el usuario desde la cookie
+// Cargar el usuario desde la cookie
 app.use(function(req, res, next) {
   if (req.cookies.userId !== undefined && req.session.user === undefined) {
     const id = req.cookies.userId;
@@ -51,15 +51,6 @@ app.use(function(req, res, next) {
       });
   } else {
     return next();
-  }
-});
-
-// Redirigir a la página de perfil si el usuario está logueado
-app.get('/users/login', function(req, res, next) {
-  if (req.session.user) {
-    res.redirect('/users/profile');
-  } else {
-    next();
   }
 });
 
