@@ -66,15 +66,26 @@ let validationsRegister = [
 ]
 
 let validationsEdit = [
-    body('mail')
+    body('email')
     .notEmpty().withMessage('El campo "email" es obligatorio.').bail()
-    .isEmail().withMessage('Debe ser un email valido'),
+    .isEmail().withMessage('Debe ser un email válido').bail()
+    .custom(function(value){
+        return db.Usuario.findOne({where: { mail: value }})
+              .then(function(user){
+                    if(user == undefined){ 
+                        return true;
+                    }
+                    else{
+                        throw new Error ('El email ya existe')
+                    }
+              })
+    }),
     
     body('usuario')
     .notEmpty().withMessage('Por favor, introduzca un nombre de usuario'),
     
     body('contrasenia')
-    .notEmpty().withMessage('El campo "contraseña" es obligatorio.').bail() 
+    .notEmpty().withMessage('El campo "contraseña" es obligatorio.').bail()
     .isLength({ min: 4 }).withMessage('La contraseña debe tener más de 4 caracteres')
 ]
 

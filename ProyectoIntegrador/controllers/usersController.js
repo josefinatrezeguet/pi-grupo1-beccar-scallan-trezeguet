@@ -22,10 +22,10 @@ const usersController = {
     register: function(req, res, next) {
         
         if (req.session.user != undefined) {
-            return res.redirect("/users/profile/id/" + req.session.user.id); //no deberia reditigir a la home o al perfil?
+            return res.redirect("/users/profile/id/" + req.session.user.id);
         } 
         else {
-            return res.render('register', {title: "Register"})
+            return res.render('register', {title: "Registrate"})
         };
     },
     
@@ -56,24 +56,27 @@ const usersController = {
             });
     },
 
-    usersEdit: function(req,res,next) {
+    usersEdit: function(req, res, next) {
         if (req.session.user != undefined) {
             let id = req.session.user.id;
-
+    
             db.Usuario.findByPk(id)
-            .then(function(results){
-                return res.render('profile-edit', {title: 'Editar perfil', usuario: results});
+            .then(function(usuario){
+                if (usuario) {
+                    return res.render('profile-edit', { title: 'Editar perfil', usuario: usuario });
+                } else {
+                    return res.status(404).send('Usuario no encontrado');
+                }
             })
             .catch(function(error){
                 console.log(error);
+                return res.status(500).send("Error interno al obtener el usuario para editar");
             });    
-        }
-        else {
+        } else {
             return res.redirect("/users/login");
         }
-
     },
-
+    
     loginUser: function(req, res, next) {
         let form = req.body;
         let errors = validationResult(req);
@@ -135,10 +138,10 @@ const usersController = {
         let errors = validationResult(req);
 
         if (errors.isEmpty()) {
-            return res.send("ACA HAY QUE HACER TODO EL UPDATE DE USUARIO (controller Users en el metodo .update si errors.isEmpty) (borrar el res send y hacer todo el desarrollo)")
+            return res.send("FALTA")
         }
         else {
-            return res.render('profile-edit', {title: "Profile Edit", errors: errors.mapped(), old: req.body }); 
+            return res.render('profile-edit', {title: "Editar perfil", errors: errors.mapped(), old: req.body }); 
         }
         
     }
