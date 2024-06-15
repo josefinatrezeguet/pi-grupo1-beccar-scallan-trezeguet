@@ -19,7 +19,7 @@
 				<h2 class="products-title">Editar perfil</h2>
 			</div>
 			<form action="/users/edit" method="post">
-				<input class="form-input" type="email" name="email" value="<%= usuario.mail %>" placeholder="Email" required>
+				<input class="form-input" type="email" name="mail" value="<%= usuario.mail %>" placeholder="Email" required>
 				<% if (locals.errors && locals.errors.mail) { %>
 					<p class="feedback"><%= locals.errors.mail.msg %></p><br>
 				<% } %>
@@ -32,17 +32,17 @@
 					<p class="feedback"><%= locals.errors.contrasenia.msg %></p><br>
 				<% } %>
 				<label for="fecha" class="label">Fecha de nacimiento</label>
-				<input class="form-input" type="date" name="fecha" value="<%= usuario.fecha %>" required>
+				<input class="form-input" type="date" name="fecha" value="<%= usuario.fecha %>">
 				<% if (locals.errors && locals.errors.fecha) { %>
 					<p class="feedback"><%= locals.errors.fecha.msg %></p><br>
 				<% } %>
 				<label for="dni" class="label">Número de documento</label>
-				<input class="form-input" type="number" name="dni" value="<%= usuario.dni %>" required>
+				<input class="form-input" type="number" name="dni" value="<%= usuario.dni %>">
 				<% if (locals.errors && locals.errors.dni) { %>
 					<p class="feedback"><%= locals.errors.dni.msg %></p><br>
 				<% } %>
 				<label for="fotoPerfil" class="label">Foto de perfil</label>
-				<input class="form-input" type="text" name="fotoPerfil" value="<%= usuario.fotoPerfil %>" required>
+				<input class="form-input" type="text" name="fotoPerfil" value="<%= usuario.fotoPerfil %>">
 	
 				<button class="form-label" type="submit">Editar perfil</button>
 			</form>	

@@ -3,11 +3,12 @@ use proyecto_integrador;
 
 create table usuarios(
 id int unsigned primary key auto_increment,
-email varchar(50) not null,
+mail varchar(50) not null,
 contrasenia varchar(1000) not null,
-fecha date not null,
-dni int not null UNIQUE,
-fotoPerfil varchar(200),
+fecha date null,
+dni int null UNIQUE,
+fotoPerfil varchar(200) null,
+usuario varchar(250) not null,
 
 createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -110,29 +111,5 @@ VALUES
  (default, 10,          3,          '¡El gloss de Rhode es simplemente magnífico! Le da a mis labios un brillo deslumbrante y una sensación suave y cómoda. ¡Me encanta!',                                         default,   default,    null),
  (default, 10,          4,          '¡Este gloss es todo lo que necesito para destacar mis labios! El gloss de Rhode tiene una textura increíblemente suave y un brillo que no pasa desapercibido.',               default,   default,    null),
  (default, 10,          5,          '¡No puedo dejar de usar este gloss! El gloss de Rhode es mi favorito absoluto, su fórmula no pegajosa y sus tonos son perfectos para cualquier ocasión.',                     default,   default,    null);
-                        
--- Eliminamos productos que teníamos duplicados sin querer
-SELECT nombre, COUNT(*)
-FROM productos
-GROUP BY nombre
-HAVING COUNT(*) > 1;
-
-DELETE p1 FROM productos p1
-INNER JOIN productos p2
-WHERE p1.id > p2.id AND p1.nombre = p2.nombre;
-
--- Nos habíamos olvidado de agregar la columna de usuario
-
-ALTER TABLE usuarios
-ADD COLUMN usuario VARCHAR(250) NOT NULL;
-
--- Error de tipeo
-ALTER TABLE usuarios CHANGE COLUMN email mail VARCHAR(50) NOT NULL;
-
--- Modificamos algunas cosas para el registro
-ALTER TABLE usuarios MODIFY fecha DATE NULL;
-ALTER TABLE usuarios MODIFY dni INT NULL;
-ALTER TABLE usuarios MODIFY fotoPerfil VARCHAR(200) NULL;
-
 
 

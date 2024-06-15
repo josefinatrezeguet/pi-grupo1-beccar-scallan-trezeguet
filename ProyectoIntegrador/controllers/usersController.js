@@ -110,30 +110,31 @@ const usersController = {
     store: function(req, res) {
         let form = req.body;
         let errors = validationResult(req);
-
+    
         if (errors.isEmpty()) {
             let usuario = {
                 mail: form.email,
                 usuario: form.usuario,
                 contrasenia: bcrypt.hashSync(form.contrasenia, 10),
-                fecha: form.fecha,
-                dni: form.dni,
-                fotoPerfil: form.fotoPerfil
+                fecha: form.fecha || null,
+                dni: form.dni || null,
+                fotoPerfil: form.fotoPerfil || null
             }
     
             db.Usuario.create(usuario)
             .then((result) => {
-                return res.redirect("/users/login")
+                return res.redirect("/users/login");
             })
             .catch((err) => {
-                return console.log(err);
-            });       
+                console.log(err);
+                return res.status(500).send("Error interno al crear usuario");
+            });
         } 
         else {
             return res.render('Register', {title: "Registrate", errors: errors.mapped(), old: req.body });        
         }
     },
-
+    
     update: function(req, res) {
         let errors = validationResult(req);
 
