@@ -2,6 +2,7 @@ const db = require('../database/models');
 const { validationResult } = require('express-validator');
 
 const productController = {
+    
     index: function(req, res) {
         let id = req.params.id;
         let criterio = {
