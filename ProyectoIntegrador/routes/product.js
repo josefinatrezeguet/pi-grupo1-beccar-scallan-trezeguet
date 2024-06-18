@@ -13,7 +13,7 @@ let validations = [
         .isURL().withMessage('El campo "imagen" debe ser una URL válida.')
 ]
 let validationsComentario = [
-    body('texto')
+    body('comentario')
         .notEmpty().withMessage('El comentario no puede estar vacío.').bail()
         .isLength({ min: 3 }).withMessage('El comentario debe tener al menos 3 caracteres.')
 ];

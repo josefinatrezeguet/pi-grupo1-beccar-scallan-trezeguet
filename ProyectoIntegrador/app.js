@@ -27,15 +27,6 @@ app.use(session({
   saveUninitialized: true,
 }));
 
-// Cargar el usuario en las vistas
-app.use(function(req, res, next) {
-  if (req.session.user !== undefined) {
-    res.locals.user = req.session.user;
-  }
-  return next();
-});
-
-// Cargar el usuario desde la cookie
 app.use(function(req, res, next) {
   if (req.cookies.userId !== undefined && req.session.user === undefined) {
     const id = req.cookies.userId;
@@ -52,6 +43,13 @@ app.use(function(req, res, next) {
   } else {
     return next();
   }
+});
+
+app.use(function(req, res, next) {
+  if (req.session.user !== undefined) {
+    res.locals.user = req.session.user;
+  }
+  return next();
 });
 
 app.use('/', indexRouter);

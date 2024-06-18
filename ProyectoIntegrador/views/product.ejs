@@ -55,10 +55,10 @@
                         <% } %>
                     </section>
                     <% if (locals.user != undefined) { %>
-                    <form class="form" action="/product/id/<%= productos.id %>" method="get">
-                        <input class="form-input" type="text" value="" placeholder="Agregar comentario">
-                        <button type="submit" class="buy-now-button botonComentario">AGREGAR COMENTARIO</button>
-                    </form>
+                        <form class="form" action="/product/id/<%= productos.id %>" method="post">
+                            <input name="comentario" class="form-input" type="text" value="" placeholder="Agregar comentario">
+                            <button type="submit" class="buy-now-button botonComentario">AGREGAR COMENTARIO</button>
+                        </form>
                     <% } else { %>
                         <div class="products-title">
                             <a href="/users/login">Clickea acá para iniciar sesión y agregar un comentario.</a>
