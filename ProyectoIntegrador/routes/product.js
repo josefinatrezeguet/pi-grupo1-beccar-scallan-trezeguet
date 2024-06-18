@@ -18,11 +18,14 @@ let validationsComentario = [
         .isLength({ min: 3 }).withMessage('El comentario debe tener al menos 3 caracteres.')
 ];
 
+
+
 router.get('/id/:id', productController.index);
 router.get('/add', productController.create);
 router.post('/add', validations, productController.store);
 router.post('/editProduct', productController.formUpdate);
 router.post('/edit', validations, productController.update);
 router.post('/delete', productController.destroy);
+router.post('/id/:id', validationsComentario, productController.comment);
 
 module.exports = router;

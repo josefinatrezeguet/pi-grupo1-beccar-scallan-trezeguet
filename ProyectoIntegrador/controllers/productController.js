@@ -138,6 +138,60 @@ const productController = {
             return res.redirect("/users/login");
         }
     },
+    comment: function(req, res) {
+        let form = req.body;
+        let errors = validationResult(req);
+    
+        if (errors.isEmpty()) {
+            if (req.session.user && req.session.user.id) { 
+                let comentario = {
+                    id_usuario: req.session.user.id,
+                    id_producto: req.params.id,
+                    texto: form.comentario 
+                }
+    
+                db.Comentario.create(comentario)
+                .then((result) => {
+                    return res.redirect("/product/id/" + req.params.id);
+                }).catch((err) => {
+                    console.log(err);
+                    return res.redirect("/product/id/" + req.params.id); 
+                });
+            } else {
+                return res.redirect("/users/login");
+            }
+        } else {
+            let id = req.params.id;
+            let condition = false;
+            let criterio = {
+                include: [
+                    {association: "usuario"},
+                    {association: "comentarios", include: [{association: 'usuario'}]}
+                ],
+                order: [['createdAt', 'DESC']]
+            }
+    
+            db.Producto.findByPk(id, criterio)
+            .then(function(results){
+                if (req.session.user != undefined && req.session.user.id == results.usuario.id) {
+                    condition = true;
+                }
+    
+                return res.render('product', {
+                    title: "Producto",
+                    productos: results,
+                    comentarios: results.comentarios,
+                    condition: condition,
+                    errors: errors.array(),
+                    old: req.body
+                });
+            })
+            .catch(function(error){
+                console.log(error);
+                return res.redirect("/product/id/" + id);
+            });   
+        }
+    }
 
 };
 
