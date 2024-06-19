@@ -59,8 +59,11 @@
                             <input name="comentario" class="form-input" type="text" value="" placeholder="Agregar comentario">
                             <button type="submit" class="buy-now-button botonComentario">AGREGAR COMENTARIO</button>
                         </form>
-                    <% } else { %>
-                        <div class="products-title">
+                        <% if (locals.errors && locals.errors.comentario) { %>
+                            <p class="feedback"><%= locals.errors.comentario.msg %></p><br>
+                        <% } %>
+                        <% } else { %>
+                            <div class="products-title">
                             <a href="/users/login">Clickea acá para iniciar sesión y agregar un comentario.</a>
                         </div>
                     <% } %>

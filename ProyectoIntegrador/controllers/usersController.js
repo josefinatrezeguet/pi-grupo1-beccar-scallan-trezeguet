@@ -6,7 +6,7 @@ const usersController = {
 
     login: function(req, res, next) {
         if (req.session.user != undefined) {
-            return res.redirect("/users/profile/id/" + result.id);
+            return res.redirect("/users/profile/id/" + req.session.user.id);
         } 
         else {
             return res.render('login', {title:"Login"})
@@ -63,7 +63,7 @@ const usersController = {
             db.Usuario.findByPk(id)
             .then(function(usuario){
                 if (usuario) {
-                    return res.render('profile-edit', { title: 'Editar perfil', usuario: usuario });
+                    return res.render('profile-edit', { title: 'Editar perfil', usuario: usuario, errors: {} });
                 } else {
                     return res.status(404).send('Usuario no encontrado');
                 }
@@ -76,7 +76,7 @@ const usersController = {
             return res.redirect("/users/login");
         }
     },
-    
+        
     loginUser: function(req, res, next) {
         let form = req.body;
         let errors = validationResult(req);
@@ -136,15 +136,39 @@ const usersController = {
     },
     
     update: function(req, res) {
+        let form = req.body;
         let errors = validationResult(req);
-
+    
         if (errors.isEmpty()) {
-            return res.send("FALTA")
+            let filtrado = { where: { id: req.session.user.id } } 
+    
+            let usuario = {
+                mail: form.mail,
+                usuario: form.usuario,
+                contrasenia: bcrypt.hashSync(form.contrasenia, 10),
+                fecha: form.fecha || null,
+                dni: form.dni || null,
+                fotoPerfil: form.fotoPerfil || null
+            }
+    
+            db.Usuario.update(usuario, filtrado)
+            .then((result) => {
+                return res.redirect("/users/profile/id/" + req.session.user.id);
+            })
+            .catch((err) => {
+                console.log(err);
+                return res.status(500).send("Error interno al actualizar el usuario");
+            });       
+        } else {
+            db.Usuario.findByPk(req.session.user.id)
+            .then(function(usuario){
+                return res.render('profile-edit', {title: "Editar perfil", errors: errors.mapped(), old: req.body, usuario: usuario });
+            })
+            .catch(function(error){
+                console.log(error);
+                return res.status(500).send("Error interno al obtener el usuario para editar");
+            });
         }
-        else {
-            return res.render('profile-edit', {title: "Editar perfil", errors: errors.mapped(), old: req.body }); 
-        }
-        
     }
 };
 

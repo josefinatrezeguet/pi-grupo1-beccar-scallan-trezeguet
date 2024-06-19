@@ -11,8 +11,10 @@ const productController = {
               {association: "comentarios", 
                 include: [{association: 'usuario'} 
                 ]}
-            ]
+            ],
+            order: [[{model: db.Comentario, as: 'comentarios'}, 'createdAt', 'DESC']]
         }
+
         let condition = false;
 
         db.Producto.findByPk(id, criterio)
@@ -138,6 +140,7 @@ const productController = {
             return res.redirect("/users/login");
         }
     },
+
     comment: function(req, res) {
         let form = req.body;
         let errors = validationResult(req);
@@ -165,10 +168,12 @@ const productController = {
             let condition = false;
             let criterio = {
                 include: [
-                    {association: "usuario"},
-                    {association: "comentarios", include: [{association: 'usuario'}]}
+                {association: "usuario"},
+                {association: "comentarios", 
+                    include: [{association: 'usuario'} 
+                    ]}
                 ],
-                order: [['createdAt', 'DESC']]
+                order: [[{model: db.Comentario, as: 'comentarios'}, 'createdAt', 'DESC']]
             }
     
             db.Producto.findByPk(id, criterio)

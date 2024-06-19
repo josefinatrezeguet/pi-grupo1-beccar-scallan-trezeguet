@@ -4,6 +4,7 @@ const usersController = require("../controllers/usersController");
 const { body } = require('express-validator');
 const db = require('../database/models');
 const bcrypt = require("bcryptjs");
+const session = require('express-session')
 
 let validationsLogin = [
     body('email')
@@ -65,20 +66,9 @@ let validationsRegister = [
 ]
 
 let validationsEdit = [
-    body('email')
+    body('mail')
     .notEmpty().withMessage('El campo "email" es obligatorio.').bail()
-    .isEmail().withMessage('Debe ser un email válido.').bail()
-    .custom(function(value){
-        return db.Usuario.findOne({where: { mail: value }})
-              .then(function(user){
-                    if(user == undefined){ 
-                        return true;
-                    }
-                    else{
-                        throw new Error ('El email ya está registrado.')
-                    }
-              })
-    }),
+    .isEmail().withMessage('Debe ser un email válido.').bail(),
     
     body('usuario')
     .notEmpty().withMessage('Por favor, introduzca un nombre de usuario.'),
