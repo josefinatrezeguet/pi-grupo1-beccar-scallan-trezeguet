@@ -49,7 +49,12 @@ const usersController = {
                     condition = true;
                 }
 
-                return res.render('profile', {title: `${results.mail}`, usuario: results, productos: results.productos, comentarios: results.comentarios.length, condition: condition});
+                return res.render('profile', 
+                {title: `${results.mail}`, 
+                usuario: results, 
+                productos: results.productos, 
+                comentarios: results.comentarios.length, 
+                condition: condition});
             })
             .catch(function(error){
                 console.log(error);
@@ -70,7 +75,7 @@ const usersController = {
             })
             .catch(function(error){
                 console.log(error);
-                return res.status(500).send("Error interno al obtener el usuario para editar");
+                return res.status(500).send("Error al obtener el usuario para editar");
             });    
         } else {
             return res.redirect("/users/login");
@@ -127,7 +132,7 @@ const usersController = {
             })
             .catch((err) => {
                 console.log(err);
-                return res.status(500).send("Error interno al crear usuario");
+                return res.status(500).send("Error al crear usuario");
             });
         } 
         else {
@@ -153,11 +158,20 @@ const usersController = {
     
             db.Usuario.update(usuario, filtrado)
             .then((result) => {
+                req.session.user.mail = form.mail;
+                req.session.user.usuario = form.usuario;
+                req.session.user.contrasenia = usuario.contrasenia;
+                req.session.user.fecha = form.fecha;
+                req.session.user.dni = form.dni;
+                req.session.user.fotoPerfil = form.fotoPerfil;
+    
+                res.locals.user = req.session.user;
+    
                 return res.redirect("/users/profile/id/" + req.session.user.id);
             })
             .catch((err) => {
                 console.log(err);
-                return res.status(500).send("Error interno al actualizar el usuario");
+                return res.status(500).send("Error al actualizar el usuario");
             });       
         } else {
             db.Usuario.findByPk(req.session.user.id)
@@ -166,11 +180,10 @@ const usersController = {
             })
             .catch(function(error){
                 console.log(error);
-                return res.status(500).send("Error interno al obtener el usuario para editar");
+                return res.status(500).send("Error al obtener el usuario para editar");
             });
         }
     }
 };
-
 
 module.exports = usersController;

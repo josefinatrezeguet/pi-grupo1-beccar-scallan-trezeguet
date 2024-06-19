@@ -41,6 +41,9 @@ app.use(function(req, res, next) {
         return next(); 
       });
   } else {
+    if (req.session.user !== undefined) {
+      res.locals.user = req.session.user;
+    }
     return next();
   }
 });

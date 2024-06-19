@@ -2,40 +2,42 @@ const db = require('../database/models');
 const { validationResult } = require('express-validator');
 
 const productController = {
-    
+
     index: function(req, res) {
         let id = req.params.id;
         let criterio = {
             include: [
-              {association: "usuario"},
-              {association: "comentarios", 
-                include: [{association: 'usuario'} 
-                ]}
+                { association: "usuario" },
+                {
+                    association: "comentarios",
+                    include: [{ association: 'usuario' }]
+                }
             ],
-            order: [[{model: db.Comentario, as: 'comentarios'}, 'createdAt', 'DESC']]
+            order: [[{ model: db.Comentario, as: 'comentarios' }, 'createdAt', 'DESC']]
         }
 
         let condition = false;
 
         db.Producto.findByPk(id, criterio)
-        .then(function(results){
-
-            if (req.session.user != undefined && req.session.user.id == results.usuario.id) {
-                condition = true;
-            }
-            return res.render('product', {title:"Product", productos: results, comentarios: results.comentarios, condition: condition});
-        })
-        .catch(function(error){
-            console.log(error);
-        });
+            .then(function(results) {
+                if (req.session.user != undefined && req.session.user.id == results.usuario.id) {
+                    condition = true;
+                }
+                return res.render('product', 
+                { title: "Producto", 
+                productos: results, 
+                comentarios: results.comentarios, 
+                condition: condition });
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
     },
 
     create: function(req, res) {
-
         if (req.session.user != undefined) {
-            return res.render('product-add', {title:"Añadir producto"})
-        }
-        else {
+            return res.render('product-add', { title: "Añadir producto" });
+        } else {
             return res.redirect("/users/login");
         }
     },
@@ -46,34 +48,27 @@ const productController = {
 
         if (errors.isEmpty()) {
             db.Producto.create(form)
-            .then((result) => {
-                return res.redirect("/product/id/" + result.id)
-            }).catch((err) => {
-              return console.log(err);
-            });        
-        } 
-        else {
-            return res.render('product-add', {title: "Registrate", errors: errors.mapped(), old: req.body });        
+                .then((result) => {
+                    return res.redirect("/product/id/" + result.id);
+                }).catch((err) => {
+                    return console.log(err);
+                });
+        } else {
+            return res.render('product-add', { title: "Registrate", errors: errors.mapped(), old: req.body });
         }
     },
 
     formUpdate: function(req, res) {
-        
         let form = req.body;
-
-        let criterio = {
-            include: [
-              {association: "usuario"}
-            ]}
+        let criterio = { include: [{ association: "usuario" }] };
 
         db.Producto.findByPk(form.id, criterio)
-        .then(function(results){
-            return res.render('product-edit', {title: "Editar el producto", productos: results});
-        })
-        .catch((err) => {
-            return console.log(err);
-          });
-        
+            .then(function(results) {
+                return res.render('product-edit', { title: "Editar el producto", productos: results });
+            })
+            .catch((err) => {
+                return console.log(err);
+            });
     },
 
     update: (req, res) => {
@@ -81,15 +76,14 @@ const productController = {
         let errors = validationResult(req);
 
         if (errors.isEmpty()) {
-
-            let filtrado = { where: { id: form.id } }
+            let filtrado = { where: { id: form.id } };
 
             if (req.session.user != undefined) {
                 let id = req.session.user.id;
                 if (form.idUsuario == id) {
                     db.Producto.update(form, filtrado)
                         .then((result) => {
-                            return res.redirect("/product/id/" + form.id)
+                            return res.redirect("/product/id/" + form.id);
                         }).catch((err) => {
                             return console.log(err);
                         });
@@ -99,15 +93,13 @@ const productController = {
             } else {
                 return res.redirect("/users/login");
             }
-        } 
-        else {
-
-            let criterio = { include: [{ association: "usuario" }] }
+        } else {
+            let criterio = { include: [{ association: "usuario" }] };
 
             db.Producto.findByPk(form.id, criterio)
-                .then(function (results) {
+                .then(function(results) {
                     return res.render('product-edit', {
-                        title: "Editar producto",
+                        title: "Editar el producto",
                         errors: errors.mapped(),
                         old: req.body,
                         productos: results
@@ -121,12 +113,15 @@ const productController = {
 
     destroy: (req, res) => {
         let form = req.body;
-        let filtrado = { where: { id: form.id } }
+        let filtrado = { where: { id: form.id } };
 
         if (req.session.user != undefined) {
             let id = req.session.user.id;
             if (form.idUsuario == id) {
-                db.Producto.destroy(filtrado)
+                db.Comentario.destroy({ where: { id_producto: form.id } })
+                    .then(() => {
+                        return db.Producto.destroy(filtrado);
+                    })
                     .then((result) => {
                         return res.redirect("/");
                     })
@@ -144,22 +139,22 @@ const productController = {
     comment: function(req, res) {
         let form = req.body;
         let errors = validationResult(req);
-    
+
         if (errors.isEmpty()) {
-            if (req.session.user && req.session.user.id) { 
+            if (req.session.user && req.session.user.id) {
                 let comentario = {
                     id_usuario: req.session.user.id,
                     id_producto: req.params.id,
-                    texto: form.comentario 
+                    texto: form.comentario
                 }
-    
+
                 db.Comentario.create(comentario)
-                .then((result) => {
-                    return res.redirect("/product/id/" + req.params.id);
-                }).catch((err) => {
-                    console.log(err);
-                    return res.redirect("/product/id/" + req.params.id); 
-                });
+                    .then((result) => {
+                        return res.redirect("/product/id/" + req.params.id);
+                    }).catch((err) => {
+                        console.log(err);
+                        return res.redirect("/product/id/" + req.params.id);
+                    });
             } else {
                 return res.redirect("/users/login");
             }
@@ -168,36 +163,36 @@ const productController = {
             let condition = false;
             let criterio = {
                 include: [
-                {association: "usuario"},
-                {association: "comentarios", 
-                    include: [{association: 'usuario'} 
-                    ]}
+                    { association: "usuario" },
+                    {
+                        association: "comentarios",
+                        include: [{ association: 'usuario' }]
+                    }
                 ],
-                order: [[{model: db.Comentario, as: 'comentarios'}, 'createdAt', 'DESC']]
+                order: [[{ model: db.Comentario, as: 'comentarios' }, 'createdAt', 'DESC']]
             }
-    
+
             db.Producto.findByPk(id, criterio)
-            .then(function(results){
-                if (req.session.user != undefined && req.session.user.id == results.usuario.id) {
-                    condition = true;
-                }
-    
-                return res.render('product', {
-                    title: "Producto",
-                    productos: results,
-                    comentarios: results.comentarios,
-                    condition: condition,
-                    errors: errors.array(),
-                    old: req.body
+                .then(function(results) {
+                    if (req.session.user != undefined && req.session.user.id == results.usuario.id) {
+                        condition = true;
+                    }
+
+                    return res.render('product', {
+                        title: "Producto",
+                        productos: results,
+                        comentarios: results.comentarios,
+                        condition: condition,
+                        errors: errors.array(),
+                        old: req.body
+                    });
+                })
+                .catch(function(error) {
+                    console.log(error);
+                    return res.redirect("/product/id/" + id);
                 });
-            })
-            .catch(function(error){
-                console.log(error);
-                return res.redirect("/product/id/" + id);
-            });   
         }
     }
-
 };
 
 module.exports = productController;
